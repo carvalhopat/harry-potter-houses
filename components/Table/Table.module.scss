@@ -1,0 +1,43 @@
+.listTable {
+  display: flex;
+  justify-content: center;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    tbody tr:hover td,
+    .table tbody tr:hover th {
+      background-color: #f2fbfd;
+    }
+  }
+
+  th {
+    text-align: left;
+    padding-right: 24px;
+    color: #3fafcb;
+  }
+
+  tr {
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 0.9rem;
+    height: 35px;
+
+    .numberCell {
+      text-align: right;
+    }
+  }
+
+  tbody {
+    tr {
+      &:hover {
+        background-color: #eee;
+      }
+    }
+  }
+
+  td {
+    color: #595959;
+    padding-right: 20px;
+  }
+}

@@ -1,0 +1,66 @@
+.container {
+  margin: 30px 80px;
+  border: 1px solid #e8e8e8;
+  background-color: #fff;
+  height: 80vh;
+  display: flex;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 16%);
+
+  .container2 {
+    display: grid;
+    width: 100%;
+    grid-template-rows: 120px auto;
+    grid-template-areas:
+      "search logo"
+      "list list";
+
+    .search,
+    .logo {
+      padding: 20px;
+      background-color: #f2fbfd;
+    }
+
+    .list {
+      grid-area: list;
+      overflow-y: scroll;
+      padding: 20px;
+    }
+
+    .search {
+      grid-area: search;
+      border-top-left-radius: 0.5rem;
+
+      h2 {
+        margin: 0 0 16px;
+        color: #3fafcb;
+      }
+    }
+
+    .logo {
+      grid-area: logo;
+      text-align: right;
+      border-top-right-radius: 0.5rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  .badServer{
+    grid-area: list;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .errorCode{
+        font-size: 64px;
+        color: #3fafcb;
+        font-weight: 600;
+
+        p:first-child {
+            font-weight: 600;
+          }
+    }
+  }
+}
