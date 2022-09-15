@@ -1,55 +1,40 @@
-import { useEffect, useState, useCallback } from "react";
-import { useRouter } from "next/router";
-import { includes, toLower, isEmpty } from "ramda";
-import dynamic from "next/dynamic";
-import TListData from "../../types/TListData";
+import { useEffect, useState, useCallback } from 'react';
+import { useRouter } from 'next/router';
+import { includes, toLower, isEmpty } from 'ramda';
+import dynamic from 'next/dynamic';
+import TListData from '../../types/TListData';
+import api from '../../helpers/axiosInstance'
 
 const mappedTermTypes = {
-  name: "name",
-  status: "status",
+  name: 'name',
+  status: 'status'
 };
 
-function useCandidatesList({ data }: { data: any }) {
-  const [matches, setMatches] = useState([] as TListData[]);
+function useCandidatesList() {
+  const [listData, setListData] = useState([] as any);
+  const [error, setError] = useState([] as any);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const router = useRouter();
   const savedTypedValue =
-    typeof window !== "undefined" ? localStorage.getItem("searchedValue") : "";
+  typeof window !== 'undefined' ? localStorage.getItem('searchedValue') : '';
   const {
-    query: { termType = "name", q = savedTypedValue },
-  } = router;
+    query: { termType = 'name', q = savedTypedValue }
+  } = useRouter();
 
-  const getNewMatches = useCallback(
-    (q: string) =>
-      data?.filter((item: any) => {
-        localStorage.setItem("searchedValue", q);
-        return includes(
-          q,
-          item[termType as keyof typeof mappedTermTypes].toLowerCase()
-        );
-      }),
-    [termType, data]
-  );
+  const fetchCandidatesList = useCallback(() => {
+    setIsLoading(true)
+    api.get('/api/candidates', { params: {
+      query: q, termType, page: 1
+      }
+    })
+    .then(({data}) => setListData(data))
+    .catch(error => setError(error))
+    .finally(() => setIsLoading(false))
+  }, [q,termType])
 
   useEffect(() => {
-    if (q) {
-      const newMatches = getNewMatches(q as string);
-      setMatches(newMatches);
-    } else {
-      localStorage.setItem("searchedValue", "");
-      setMatches(data);
-    }
-  }, [termType, q, getNewMatches, data]);
-
-  const onSearch = ({ q = "" }) => {
-    if (!isEmpty(q)) {
-      const query = toLower(q);
-      const newMatches = getNewMatches(query);
-      setMatches(newMatches);
-    } else {
-      setMatches([]);
-    }
-  };
+    fetchCandidatesList()
+  }, [fetchCandidatesList])
 
   // function compare(a: any, b: any ) {
   //   if ( a.name < b.name ){
@@ -61,9 +46,13 @@ function useCandidatesList({ data }: { data: any }) {
   //   return 0;
   // }
 
-  const Table = dynamic(() => import("../Table"), { ssr: false });
+  const Table = dynamic(() => import('../Table'), { ssr: false });
 
-  return { onSearch, setMatches, matches, Table };
+  return {  
+    Table, 
+    isLoading, 
+    listData, 
+    error: listData?.code === 500 || error };
 }
 
 export default useCandidatesList;

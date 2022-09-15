@@ -12,8 +12,8 @@
     width: 100%;
     grid-template-rows: 120px auto;
     grid-template-areas:
-      "search logo"
-      "list list";
+      'search logo'
+      'list list';
 
     .search,
     .logo {
@@ -46,21 +46,42 @@
     }
   }
 
-  .badServer{
+  .badServer {
     grid-area: list;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    .errorCode{
-        font-size: 64px;
-        color: #3fafcb;
-        font-weight: 600;
+    .errorCode {
+      font-size: 64px;
+      color: #3fafcb;
+      font-weight: 600;
 
-        p:first-child {
-            font-weight: 600;
-          }
+      p:first-child {
+        font-weight: 600;
+      }
     }
   }
+
+  .loaderWrapper{
+    grid-area: list;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  .loader {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #3fafcb;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
 }

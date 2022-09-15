@@ -1,6 +1,6 @@
-import TListData from "../../types/TListData";
-import { isEmpty } from "ramda";
-import styles from "./Table.module.scss";
+import TListData from '../../types/TListData';
+import { isEmpty } from 'ramda';
+import styles from './Table.module.scss';
 
 type TListParams = {
   list: TListData[];
@@ -33,7 +33,7 @@ function Table({ list }: TListParams) {
                 birth_date,
                 year_of_experience,
                 position_applied,
-                application_date,
+                application_date
               }: TListData) => {
                 return (
                   <tr key={name} className={styles.tableRow}>

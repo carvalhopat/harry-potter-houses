@@ -1,13 +1,12 @@
-import { useRouter } from "next/router";
-import debounceFunction from "./helpers/debounceFunction";
+import { useRouter } from 'next/router';
+import debounceFunction from './helpers/debounceFunction';
 
 function useSearchBar({ onSearch }: any) {
-  let debounced: ((...args: any[]) => Promise<unknown>) | (() => void) | null =
-    null;
+  let debounced: ((...args: any[]) => Promise<unknown>) | (() => void) | null = null;
 
   const router = useRouter();
-  const currentValue =
-    typeof window !== "undefined" ? localStorage.getItem("searchedValue") : "";
+  const currentSearchedValue = router.query.q || '';
+  const currentTermTypeValue = router.query.termType || '';
 
   const onSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -15,11 +14,11 @@ function useSearchBar({ onSearch }: any) {
 
     onSearch({
       ...router.query,
-      q: (target.querySelector("#search") as HTMLInputElement)!.value,
+      q: (target.querySelector('#search') as HTMLInputElement)!.value
     });
   };
 
-  const onTypeTerm = (e: React.FormEvent<HTMLInputElement>) => {
+  const onSearchTerm = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     const target = e.target as HTMLTextAreaElement;
 
@@ -33,7 +32,7 @@ function useSearchBar({ onSearch }: any) {
     if (!debounced) {
       debounced = debounceFunction(onSetSearch, 450);
     }
-
+    localStorage.setItem('searchedValue', target.value);
     debounced();
   };
 
@@ -46,7 +45,7 @@ function useSearchBar({ onSearch }: any) {
     push({ query: { ...router.query, termType: searchedValue } });
   };
 
-  return { onSearchSubmit, onChooseFilterType, onTypeTerm, currentValue };
+  return { onSearchSubmit, onChooseFilterType, onSearchTerm, currentSearchedValue, currentTermTypeValue };
 }
 
 export default useSearchBar;
