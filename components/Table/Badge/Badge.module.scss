@@ -1,0 +1,23 @@
+.badge{
+    text-align: center;
+    font-weight: 600;
+
+   & > div{
+        padding: 4px;
+        border-radius: 4px;
+    }
+
+    .waiting{
+        background-color: #D4D4D4;
+    }
+
+    .approved{
+        background-color: #18B32D;
+        color: #fff;
+    }
+
+    .rejected{
+        background-color: #fb5c5c;
+        color: #fff;
+    }
+}

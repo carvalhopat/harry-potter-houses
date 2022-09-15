@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import api from '../../helpers/axiosInstance';
-import { includes, toLower, isEmpty } from 'ramda';
+import { includes, toLower, isEmpty, isNil } from 'ramda';
 
 type TData = {
   name: string;
@@ -17,9 +17,11 @@ const mappedTermTypes = {
   status: 'status'
 };
 
-const getNewMatches = ({query, data, termType}: TNewMacthesParams) => data?.filter((item: any) => {
+const getNewMatches = ({query, data, termType}: TNewMacthesParams) => {
+  console.log({query, data, termType})
+  return data?.filter((item: any) => {
       return includes(query, item[termType as keyof typeof mappedTermTypes].toLowerCase());
-    })
+    })}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<TData>) {
   const {query: {query, termType, page}} = req;
@@ -29,15 +31,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const candidatesList = response.data;
 
     if(candidatesList?.error?.code === 500){
-      console.log('caiu aqui')
+      console.log('caiu')
       return res.status(500).send({error: 'Internal Server Error'})
     }
 
-    if (!isEmpty(query)) {
+    if (!isNil(query)) {
+      console.log('caiu2')
       const newMatches = getNewMatches({query, data: candidatesList.data, termType});
+      console.log(newMatches)
       return res.status(200).send(newMatches);
     } 
-
+    console.log('caiu3')
     return res.status(200).send(candidatesList.data);
   } catch (error) {
     return res.status(500).send({data: 'Internal Server Error'})

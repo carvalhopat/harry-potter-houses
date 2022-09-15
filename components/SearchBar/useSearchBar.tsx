@@ -10,12 +10,9 @@ function useSearchBar({ onSearch }: any) {
 
   const onSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const target = e.target as HTMLTextAreaElement;
+    // const target = e.target as HTMLTextAreaElement;
 
-    onSearch({
-      ...router.query,
-      q: (target.querySelector('#search') as HTMLInputElement)!.value
-    });
+    // onSearch({q: (target.querySelector('#search') as HTMLInputElement)!.value});
   };
 
   const onSearchTerm = (e: React.FormEvent<HTMLInputElement>) => {
@@ -25,14 +22,14 @@ function useSearchBar({ onSearch }: any) {
     const onSetSearch = () => {
       const searchedValue = target.value;
 
-      const { push } = router;
-      push({ query: { ...router.query, q: searchedValue } });
+      //onSearch({q: searchedValue});
+      router.push({ query: { ...router.query, q: searchedValue } });
     };
 
     if (!debounced) {
       debounced = debounceFunction(onSetSearch, 450);
     }
-    localStorage.setItem('searchedValue', target.value);
+    // localStorage.setItem('searchedValue', target.value);
     debounced();
   };
 

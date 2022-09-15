@@ -1,6 +1,8 @@
 import TListData from '../../types/TListData';
 import { isEmpty } from 'ramda';
 import styles from './Table.module.scss';
+import Badge from './Badge'
+import Image from 'next/image';
 
 type TListParams = {
   list: TListData[];
@@ -9,6 +11,13 @@ type TListParams = {
 function Table({ list }: TListParams) {
   return (
     <div className={styles.listTable}>
+      {isEmpty(list) ? (
+            <div className={styles.badServer}>
+              <Image src="/search-icon.svg" width="200" height="50" alt="Internal Server Error" />
+              <h4>No matching results found.</h4>
+              <p>We&apos;re sorry! Please try another way.</p>
+          </div>
+          ) :
       <table>
         <thead>
           <tr>
@@ -22,10 +31,7 @@ function Table({ list }: TListParams) {
           </tr>
         </thead>
         <tbody>
-          {isEmpty(list) ? (
-            <p>ops</p>
-          ) : (
-            list?.map(
+            {list?.map(
               ({
                 name,
                 status,
@@ -43,14 +49,14 @@ function Table({ list }: TListParams) {
                     <td className={styles.numberCell}>{year_of_experience}</td>
                     <td>{position_applied}</td>
                     <td className={styles.numberCell}>{application_date}</td>
-                    <td>{status}</td>
+                    <td><Badge status={status}/></td>
                   </tr>
                 );
               }
-            )
-          )}
+            )}
         </tbody>
       </table>
+}
     </div>
   );
 }

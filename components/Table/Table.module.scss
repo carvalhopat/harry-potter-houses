@@ -2,6 +2,22 @@
   display: flex;
   justify-content: center;
 
+  .badServer {
+    grid-area: list;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+
+    h4{
+      margin-bottom: 0;
+    }
+      p{
+        margin-top: 8px;
+      }
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;
@@ -21,7 +37,7 @@
   tr {
     border-bottom: 1px solid #e8e8e8;
     font-size: 0.9rem;
-    height: 35px;
+    height: 45px;
 
     .numberCell {
       text-align: right;

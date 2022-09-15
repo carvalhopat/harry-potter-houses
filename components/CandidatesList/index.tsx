@@ -6,14 +6,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 function CandidatesList() {
-  const { Table, isLoading, listData, error } = useCandidatesList();
+  const { Table, isLoading, listData, error, onSearch } = useCandidatesList();
 
   return (
     <div className={styles.container}>
-      <div className={styles.container2}>
+      <div className={styles.containerGrid}>
         <div className={styles.search}>
           <h2>Applications</h2>
-          <SearchBar />
+          <SearchBar/>
         </div>
         <div className={styles.logo}>
           <Link href="https://www.personio.com/">
@@ -27,9 +27,9 @@ function CandidatesList() {
             </div>
           ) : error ? (
             <div className={styles.badServer}>
-              <div className={styles.errorCode}>500</div>
-              <p>Internal Server Error</p>
-              <p>Hang in there! We&apos;ll be right back.</p>
+              <Image src="/error-icon.svg" width="200" height="50" alt="Internal Server Error" />
+              <h4>Oops! An error has occurred.</h4>
+              <p>Hang in there! We&apos;re working to fix the issues.</p>
             </div>
           ) :
           (
