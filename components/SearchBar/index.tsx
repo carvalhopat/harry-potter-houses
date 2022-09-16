@@ -2,18 +2,26 @@ import useSearchBar from './useSearchBar';
 import styles from './SearchBar.module.scss';
 
 function SearchBar({ onSearch }: any) {
-  const { onSearchSubmit, onChooseFilterType, onSearchTerm, currentSearchedValue, currentTermTypeValue } = useSearchBar({
+  const {
+    onSearchSubmit,
+    onChooseFilterType,
+    onSearchTerm,
+    currentSearchedValue,
+    currentTermTypeValue
+  } = useSearchBar({
     onSearch
   });
 
   return (
     <div className={styles.searchBar}>
       <div className={styles.filterType}>
-        {/* <label htmlFor="cars">Choose a car:</label> */}
-        <select name="filterType" id="filterType" defaultValue={currentTermTypeValue} onChange={(e) => onChooseFilterType(e)}>
-          <option value="name">
-            Filter by name
-          </option>
+        <select
+          name="filterType"
+          id="filterType"
+          defaultValue={currentTermTypeValue}
+          onChange={(e) => onChooseFilterType(e)}
+        >
+          <option value="name">Filter by name</option>
           <option value="status">Filter by status</option>
         </select>
       </div>
@@ -28,7 +36,6 @@ function SearchBar({ onSearch }: any) {
           placeholder="Search"
           defaultValue={currentSearchedValue}
         />
-        {/* <button type="submit">Go</button> */}
       </form>
     </div>
   );

@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
 
-  .badServer {
+  .notFound {
     grid-area: list;
     display: flex;
     flex-direction: column;
@@ -10,12 +10,12 @@
     align-items: center;
     height: 50vh;
 
-    h4{
+    h4 {
       margin-bottom: 0;
     }
-      p{
-        margin-top: 8px;
-      }
+    p {
+      margin-top: 8px;
+    }
   }
 
   table {
@@ -32,6 +32,13 @@
     text-align: left;
     padding-right: 24px;
     color: #3fafcb;
+
+    p {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      position: relative;
+    }
   }
 
   tr {
@@ -41,6 +48,12 @@
 
     .numberCell {
       text-align: right;
+    }
+
+    .tableHeadValue {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
     }
   }
 

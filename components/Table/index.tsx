@@ -1,36 +1,42 @@
 import TListData from '../../types/TListData';
 import { isEmpty } from 'ramda';
 import styles from './Table.module.scss';
-import Badge from './Badge'
+import Badge from './Badge';
 import Image from 'next/image';
+import Sort from './Sort';
+import cx from 'classnames';
 
 type TListParams = {
   list: TListData[];
+  categories: {};
 };
 
-function Table({ list }: TListParams) {
+function Table({ categories, list }: TListParams) {
   return (
     <div className={styles.listTable}>
       {isEmpty(list) ? (
-            <div className={styles.badServer}>
-              <Image src="/search-icon.svg" width="200" height="50" alt="Internal Server Error" />
-              <h4>No matching results found.</h4>
-              <p>We&apos;re sorry! Please try another way.</p>
-          </div>
-          ) :
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th className={styles.numberCell}>Age</th>
-            <th className={styles.numberCell}>Years of experience</th>
-            <th>Position applied</th>
-            <th className={styles.numberCell}>Date of application</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
+        <div className={styles.notFound}>
+          <Image src="/search-icon.svg" width="200" height="50" alt="Search not found" />
+          <h4>No matching results found.</h4>
+          <p>We&apos;re sorry! Please try another way.</p>
+        </div>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              {Object.entries(categories).map(([category, { value, isSortable, isNumberCell }]:(string | any)[]) => {
+                return (
+                  <th key={category} className={cx({ [styles.numberCell]: isNumberCell })}>
+                    <div className={styles.tableHeadValue}>
+                      {value}
+                      {isSortable && <Sort sortType={category} />}
+                    </div>
+                  </th>
+                );
+              })}
+            </tr>
+          </thead>
+          <tbody>
             {list?.map(
               ({
                 name,
@@ -49,14 +55,16 @@ function Table({ list }: TListParams) {
                     <td className={styles.numberCell}>{year_of_experience}</td>
                     <td>{position_applied}</td>
                     <td className={styles.numberCell}>{application_date}</td>
-                    <td><Badge status={status}/></td>
+                    <td>
+                      <Badge status={status} />
+                    </td>
                   </tr>
                 );
               }
             )}
-        </tbody>
-      </table>
-}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }

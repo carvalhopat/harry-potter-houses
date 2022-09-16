@@ -1,0 +1,27 @@
+.sort {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  opacity: 100%;
+
+  & > div {
+    height: 10px;
+
+    &:hover {
+      img {
+        opacity: 20%;
+        transition: 0.3s;
+      }
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 8px;
+  }
+
+  .selected {
+    span {
+      filter: invert(1) sepia(1) saturate(5) hue-rotate(175deg);
+    }
+  }
+}

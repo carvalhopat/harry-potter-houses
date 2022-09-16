@@ -1,23 +1,23 @@
-.badge{
-    text-align: center;
-    font-weight: 600;
+.badge {
+  text-align: center;
+  font-weight: 600;
 
-   & > div{
-        padding: 4px;
-        border-radius: 4px;
-    }
+  & > div {
+    padding: 4px;
+    border-radius: 4px;
+  }
 
-    .waiting{
-        background-color: #D4D4D4;
-    }
+  .waiting {
+    background-color: #d4d4d4;
+  }
 
-    .approved{
-        background-color: #18B32D;
-        color: #fff;
-    }
+  .approved {
+    background-color: #a3e1ac;
+    color: #4da059;
+  }
 
-    .rejected{
-        background-color: #fb5c5c;
-        color: #fff;
-    }
+  .rejected {
+    background-color: #f9d9d9;
+    color: #ca8787;
+  }
 }

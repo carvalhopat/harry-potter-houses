@@ -42,7 +42,13 @@ function useSearchBar({ onSearch }: any) {
     push({ query: { ...router.query, termType: searchedValue } });
   };
 
-  return { onSearchSubmit, onChooseFilterType, onSearchTerm, currentSearchedValue, currentTermTypeValue };
+  return {
+    onSearchSubmit,
+    onChooseFilterType,
+    onSearchTerm,
+    currentSearchedValue,
+    currentTermTypeValue
+  };
 }
 
 export default useSearchBar;
