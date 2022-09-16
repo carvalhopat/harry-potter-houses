@@ -1,16 +1,14 @@
 import useSearchBar from './useSearchBar';
 import styles from './SearchBar.module.scss';
 
-function SearchBar({ onSearch }: any) {
+function SearchBar() {
   const {
     onSearchSubmit,
     onChooseFilterType,
     onSearchTerm,
     currentSearchedValue,
     currentTermTypeValue
-  } = useSearchBar({
-    onSearch
-  });
+  } = useSearchBar();
 
   return (
     <div className={styles.searchBar}>

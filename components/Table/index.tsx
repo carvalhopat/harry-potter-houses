@@ -5,6 +5,8 @@ import Badge from './Badge';
 import Image from 'next/image';
 import Sort from './Sort';
 import cx from 'classnames';
+import { useRouter } from 'next/router';
+import moment from 'moment'
 
 type TListParams = {
   list: TListData[];
@@ -12,9 +14,12 @@ type TListParams = {
 };
 
 function Table({ categories, list }: TListParams) {
+  const router = useRouter();
+  const getYearsFromDate = (date: string) => moment(). diff(date, 'years')
+
   return (
     <div className={styles.listTable}>
-      {isEmpty(list) ? (
+      {isEmpty(list) && router.isReady ? (
         <div className={styles.notFound}>
           <Image src="/search-icon.svg" width="200" height="50" alt="Search not found" />
           <h4>No matching results found.</h4>
@@ -24,9 +29,9 @@ function Table({ categories, list }: TListParams) {
         <table>
           <thead>
             <tr>
-              {Object.entries(categories).map(([category, { value, isSortable, isNumberCell }]:(string | any)[]) => {
+              {Object.entries(categories).map(([category, { value, isSortable, isNumberCell, columnWidth }]:(string | any)[]) => {
                 return (
-                  <th key={category} className={cx({ [styles.numberCell]: isNumberCell })}>
+                  <th key={category} style={{width: columnWidth}} className={cx({ [styles.numberCell]: isNumberCell })}>
                     <div className={styles.tableHeadValue}>
                       {value}
                       {isSortable && <Sort sortType={category} />}
@@ -51,7 +56,7 @@ function Table({ categories, list }: TListParams) {
                   <tr key={name} className={styles.tableRow}>
                     <td>{name}</td>
                     <td>{email}</td>
-                    <td className={styles.numberCell}>{birth_date}</td>
+                    <td className={styles.numberCell}>{getYearsFromDate(birth_date)}</td>
                     <td className={styles.numberCell}>{year_of_experience}</td>
                     <td>{position_applied}</td>
                     <td className={styles.numberCell}>{application_date}</td>

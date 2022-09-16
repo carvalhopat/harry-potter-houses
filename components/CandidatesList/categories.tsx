@@ -3,7 +3,8 @@ const categories = {
     value: 'Name'
   },
   email: {
-    value: 'Email'
+    value: 'Email',
+    columnWidth: '7%'
   },
   birth_date: {
     value: 'Age',

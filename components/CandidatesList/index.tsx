@@ -6,18 +6,18 @@ import Link from 'next/link';
 import categories from './categories';
 
 function CandidatesList() {
-  const { Table, isLoading, listData, error, onSearch } = useCandidatesList();
+  const { Table, isLoading, listData, error } = useCandidatesList();
 
   return (
     <div className={styles.container}>
       <div className={styles.containerGrid}>
         <div className={styles.search}>
-          <h2>Applications</h2>
+          <h2>Manage Applications</h2>
           <SearchBar />
         </div>
         <div className={styles.logo}>
           <Link href="https://www.personio.com/">
-            <Image src="/personio_logo.svg" width="100" height="30" alt="Personio Logo" />
+            <Image src="/personio_logo.svg" width="120" height="30" alt="Personio Logo" />
           </Link>
         </div>
         {isLoading ? (

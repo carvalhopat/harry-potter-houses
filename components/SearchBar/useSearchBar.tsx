@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import debounceFunction from './helpers/debounceFunction';
 
-function useSearchBar({ onSearch }: any) {
+function useSearchBar() {
   let debounced: ((...args: any[]) => Promise<unknown>) | (() => void) | null = null;
 
   const router = useRouter();
@@ -10,9 +10,6 @@ function useSearchBar({ onSearch }: any) {
 
   const onSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const target = e.target as HTMLTextAreaElement;
-
-    // onSearch({q: (target.querySelector('#search') as HTMLInputElement)!.value});
   };
 
   const onSearchTerm = (e: React.FormEvent<HTMLInputElement>) => {
@@ -21,15 +18,13 @@ function useSearchBar({ onSearch }: any) {
 
     const onSetSearch = () => {
       const searchedValue = target.value;
-
-      //onSearch({q: searchedValue});
       router.push({ query: { ...router.query, q: searchedValue } });
     };
 
     if (!debounced) {
       debounced = debounceFunction(onSetSearch, 450);
     }
-    // localStorage.setItem('searchedValue', target.value);
+
     debounced();
   };
 

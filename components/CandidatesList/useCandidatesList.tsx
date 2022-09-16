@@ -8,23 +8,17 @@ function useCandidatesList() {
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const savedTypedValue =
-    typeof window !== 'undefined' ? localStorage.getItem('searchedValue') : '';
-
-  const {
-    query: { termType = 'name', sort = 'asc', sortType = 'name' }
-  } = useRouter();
-  const { query } = useRouter();
+  const router = useRouter();
+  const { query } = router;
+  const { termType = 'name', sort = 'asc', sortType = 'name' } = query;
 
   const fetchCandidatesList = useCallback(() => {
     setIsLoading(true);
-    // if(query.q || query.q == ''){
     api
       .get('/api/candidates', {
         params: {
           query: query?.q,
           termType,
-          page: 1,
           sort,
           sortType
         }
@@ -32,30 +26,13 @@ function useCandidatesList() {
       .then(({ data }) => setListData(data))
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));
-    // }
-  }, [termType, query]);
+  }, [termType, query, sort, sortType]);
 
   useEffect(() => {
-    if (query.q || query.q == '') {
+    if (router.isReady) {
       fetchCandidatesList();
     }
-  }, [fetchCandidatesList, query.q]);
-
-  // useEffect(() => {
-  //   fetchCandidatesList()
-  // }, [])
-
-  const onSearch = ({ q = '' }) => localStorage.setItem('searchedValue', q);
-
-  function compare(a: any, b: any) {
-    if (a.name < b.name) {
-      return -1;
-    }
-    if (a.name > b.name) {
-      return 1;
-    }
-    return 0;
-  }
+  }, [fetchCandidatesList, router.isReady]);
 
   const Table = dynamic(() => import('../Table'), { ssr: false });
 
@@ -64,8 +41,6 @@ function useCandidatesList() {
     isLoading,
     listData,
     error: !!error,
-    onSearch,
-    compare,
     setListData
   };
 }
