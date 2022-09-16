@@ -4,6 +4,7 @@ import useCandidatesList from './useCandidatesList';
 import Image from 'next/image';
 import Link from 'next/link';
 import categories from './categories';
+import React from 'react';
 
 function CandidatesList() {
   const { Table, isLoading, listData, error } = useCandidatesList();

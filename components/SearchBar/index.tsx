@@ -1,5 +1,6 @@
 import useSearchBar from './useSearchBar';
 import styles from './SearchBar.module.scss';
+import React from 'react';
 
 function SearchBar() {
   const {
@@ -19,8 +20,8 @@ function SearchBar() {
           defaultValue={currentTermTypeValue}
           onChange={(e) => onChooseFilterType(e)}
         >
-          <option value="name">Filter by name</option>
-          <option value="status">Filter by status</option>
+          <option data-testid="select-option-name" value="name">Filter by name</option>
+          <option data-testid="select-option-status" value="status">Filter by status</option>
         </select>
       </div>
 

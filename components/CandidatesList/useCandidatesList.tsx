@@ -32,7 +32,7 @@ function useCandidatesList() {
     if (router.isReady) {
       fetchCandidatesList();
     }
-  }, [fetchCandidatesList, router.isReady]);
+  }, [fetchCandidatesList, router?.isReady]);
 
   const Table = dynamic(() => import('../Table'), { ssr: false });
 

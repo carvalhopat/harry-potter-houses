@@ -29,7 +29,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     return res.status(200).send(sortedCandidatesList);
   } catch (error) {
-    console.log('veio aqui');
     return res.status(500).send({ data: 'Internal Server Error' });
   }
 }

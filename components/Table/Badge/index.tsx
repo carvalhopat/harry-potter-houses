@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import styles from './Badge.module.scss'
+import React from 'react';
 
 type TBadgeParams = {
     status: string;

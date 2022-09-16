@@ -6,7 +6,9 @@ import Image from 'next/image';
 import Sort from './Sort';
 import cx from 'classnames';
 import { useRouter } from 'next/router';
-import moment from 'moment'
+import moment from 'moment';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 type TListParams = {
   list: TListData[];
@@ -15,7 +17,7 @@ type TListParams = {
 
 function Table({ categories, list }: TListParams) {
   const router = useRouter();
-  const getYearsFromDate = (date: string) => moment(). diff(date, 'years')
+  const getYearsFromDate = (date: string) => moment().diff(date, 'years');
 
   return (
     <div className={styles.listTable}>
@@ -29,16 +31,25 @@ function Table({ categories, list }: TListParams) {
         <table>
           <thead>
             <tr>
-              {Object.entries(categories).map(([category, { value, isSortable, isNumberCell, columnWidth }]:(string | any)[]) => {
-                return (
-                  <th key={category} style={{width: columnWidth}} className={cx({ [styles.numberCell]: isNumberCell })}>
-                    <div className={styles.tableHeadValue}>
-                      {value}
-                      {isSortable && <Sort sortType={category} />}
-                    </div>
-                  </th>
-                );
-              })}
+              {Object.entries(categories).map(
+                ([category, { value, isSortable, isNumberCell, columnWidth }]: (
+                  | string
+                  | any
+                )[]) => {
+                  return (
+                    <th
+                      key={category}
+                      style={{ width: columnWidth }}
+                      className={cx({ [styles.numberCell]: isNumberCell })}
+                    >
+                      <div className={styles.tableHeadValue}>
+                        {value}
+                        {isSortable && <Sort sortType={category} />}
+                      </div>
+                    </th>
+                  );
+                }
+              )}
             </tr>
           </thead>
           <tbody>
@@ -73,5 +84,15 @@ function Table({ categories, list }: TListParams) {
     </div>
   );
 }
+
+Table.propTypes = {
+  categories: PropTypes.shape({
+    value: PropTypes.string,
+    isSortable: PropTypes.bool,
+    isNumberCell: PropTypes.bool,
+    columnWidth: PropTypes.string
+  }).isRequired,
+  list: PropTypes.array.isRequired
+};
 
 export default Table;
