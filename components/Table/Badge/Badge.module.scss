@@ -5,20 +5,21 @@
   & > div {
     padding: 4px;
     border-radius: 4px;
+    font-size: 12px;
   }
 
   .waiting {
-    background-color: #d4d4d4;
+    border: 1px solid #939292;
     color: #939292;
   }
 
   .approved {
-    background-color: #baeac1;
-    color: #60af6c;
+    border: 1px solid #17B637;
+    color: #17B637;
   }
 
   .rejected {
-    background-color: #f9d9d9;
-    color: #ca8787;
+    border: 1px solid #E84736;
+    color: #E84736;
   }
 }

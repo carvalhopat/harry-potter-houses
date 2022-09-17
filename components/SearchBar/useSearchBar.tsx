@@ -6,7 +6,7 @@ function useSearchBar() {
 
   const router = useRouter();
   const currentSearchedValue = router.query.q || '';
-  const currentTermTypeValue = router.query.termType || '';
+  const currentTermTypeValue = typeof window !== 'undefined' && localStorage.getItem('termType');
 
   const onSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,18 +28,20 @@ function useSearchBar() {
     debounced();
   };
 
-  const onChooseFilterType = (e: React.FormEvent<HTMLSelectElement>) => {
+  const onChooseTermType = (e: React.FormEvent<HTMLSelectElement>) => {
     e.preventDefault();
     const target = e.target as HTMLTextAreaElement;
-    const searchedValue = target.value;
+    const termType = target.value;
+
+    localStorage.setItem('termType', termType);
 
     const { push } = router;
-    push({ query: { ...router.query, termType: searchedValue } });
+    push({ query: { ...router.query, termType: termType } });
   };
 
   return {
     onSearchSubmit,
-    onChooseFilterType,
+    onChooseTermType,
     onSearchTerm,
     currentSearchedValue,
     currentTermTypeValue

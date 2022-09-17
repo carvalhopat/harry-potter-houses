@@ -5,7 +5,7 @@ import React from 'react';
 function SearchBar() {
   const {
     onSearchSubmit,
-    onChooseFilterType,
+    onChooseTermType,
     onSearchTerm,
     currentSearchedValue,
     currentTermTypeValue
@@ -13,12 +13,12 @@ function SearchBar() {
 
   return (
     <div className={styles.searchBar}>
-      <div className={styles.filterType}>
+      <div className={styles.termType}>
         <select
-          name="filterType"
-          id="filterType"
-          defaultValue={currentTermTypeValue}
-          onChange={(e) => onChooseFilterType(e)}
+          name="termType"
+          id="termType"
+          value={currentTermTypeValue || ''}
+          onChange={(e) => onChooseTermType(e)}
         >
           <option data-testid="select-option-name" value="name">Filter by name</option>
           <option data-testid="select-option-status" value="status">Filter by status</option>
@@ -32,7 +32,7 @@ function SearchBar() {
           type="text"
           name="search"
           autoComplete="off"
-          placeholder="Search"
+          placeholder="Search..."
           defaultValue={currentSearchedValue}
         />
       </form>

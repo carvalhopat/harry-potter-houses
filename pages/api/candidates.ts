@@ -3,7 +3,6 @@ import api from '../../helpers/axiosInstance';
 import { isNil } from 'ramda';
 import sortList from './_utils/sortList';
 import getNewMatches from './_utils/getNewMatches'
-import mockedData from '../../pages/mockedData';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const {

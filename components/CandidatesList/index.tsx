@@ -13,7 +13,7 @@ function CandidatesList() {
     <div className={styles.container}>
       <div className={styles.containerGrid}>
         <div className={styles.search}>
-          <h2>Manage Applications</h2>
+          <h2><Image src="/manage-applications.svg" width="30" height="30" alt="Search not found" /> Manage Applications</h2>
           <SearchBar />
         </div>
         <div className={styles.logo}>

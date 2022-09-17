@@ -15,6 +15,12 @@ type TListParams = {
   categories: {};
 };
 
+type TCategoryProps = {
+  isNumberCell: boolean;
+  isBadge: boolean;
+  isFormattedDate: boolean;
+};
+
 function Table({ categories, list }: TListParams) {
   const router = useRouter();
   const getYearsFromDate = (date: string) => moment().diff(date, 'years');
@@ -53,31 +59,27 @@ function Table({ categories, list }: TListParams) {
             </tr>
           </thead>
           <tbody>
-            {list?.map(
-              ({
-                name,
-                status,
-                email,
-                birth_date,
-                year_of_experience,
-                position_applied,
-                application_date
-              }: TListData) => {
-                return (
-                  <tr key={name} className={styles.tableRow}>
-                    <td>{name}</td>
-                    <td>{email}</td>
-                    <td className={styles.numberCell}>{getYearsFromDate(birth_date)}</td>
-                    <td className={styles.numberCell}>{year_of_experience}</td>
-                    <td>{position_applied}</td>
-                    <td className={styles.numberCell}>{application_date}</td>
-                    <td>
-                      <Badge status={status} />
-                    </td>
-                  </tr>
-                );
-              }
-            )}
+            {list.map((item) => {
+              const mappedTermTypes = {name: 'name'};
+              const rowItems = Object.entries(categories).reduce((acc, [category, categoryProps]): any => {
+                const value = item[category as keyof typeof mappedTermTypes];
+
+                const { isNumberCell, isBadge, isFormattedDate } = categoryProps as TCategoryProps;
+
+                return [
+                  ...acc,
+                  <td key={category} className={cx({ [styles.numberCell]: isNumberCell })}>
+                    {isBadge? <Badge status={value}/> : isFormattedDate? getYearsFromDate(value) : value}
+                  </td>
+                ];
+              }, []);
+
+              return (
+                <tr key={item.name} className={styles.tableRow}>
+                  {rowItems}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       )}
@@ -90,6 +92,7 @@ Table.propTypes = {
     value: PropTypes.string,
     isSortable: PropTypes.bool,
     isNumberCell: PropTypes.bool,
+    isBadge: PropTypes.bool,
     columnWidth: PropTypes.string
   }).isRequired,
   list: PropTypes.array.isRequired

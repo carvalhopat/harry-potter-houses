@@ -1,21 +1,23 @@
 import PropTypes from 'prop-types';
-import styles from './Badge.module.scss'
+import styles from './Badge.module.scss';
 import React from 'react';
 
 type TBadgeParams = {
-    status: string;
-}
+  status: string;
+};
 
-function Badge({status}: TBadgeParams){
-    return (
-        <div className={styles.badge}>
-        <div className={styles[status]}>{status}</div>
-        </div>
-    )
+function Badge({ status }: TBadgeParams) {
+  return (
+    <div className={styles.badge}>
+      <div className={styles[status]} data-testid="badge">
+        {status}
+      </div>
+    </div>
+  );
 }
 
 Badge.propTypes = {
-    status: PropTypes.oneOf(['rejected', 'waiting', 'approved']).isRequired
-  };
+  status: PropTypes.oneOf(['rejected', 'waiting', 'approved']).isRequired
+};
 
-export default Badge
+export default Badge;

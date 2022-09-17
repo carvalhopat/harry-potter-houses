@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render the approved option in Badge component 1`] = `
+<div
+  class="approved"
+  data-testid="badge"
+>
+  approved
+</div>
+`;
+
+exports[`should render the rejected option in Badge component 1`] = `
+<div
+  class="rejected"
+  data-testid="badge"
+>
+  rejected
+</div>
+`;
+
+exports[`should render the waiting option in Badge component 1`] = `
+<div
+  class="waiting"
+  data-testid="badge"
+>
+  waiting
+</div>
+`;

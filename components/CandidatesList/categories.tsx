@@ -8,7 +8,8 @@ const categories = {
   },
   birth_date: {
     value: 'Age',
-    isNumberCell: true
+    isNumberCell: true,
+    isFormattedDate: true
   },
   year_of_experience: {
     value: 'Years of experience',
@@ -25,7 +26,8 @@ const categories = {
     isSortable: true
   },
   status: {
-    value: 'Status'
+    value: 'Status',
+    isBadge: true
   }
 };
 
