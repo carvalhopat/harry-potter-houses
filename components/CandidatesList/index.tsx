@@ -13,7 +13,10 @@ function CandidatesList() {
     <div className={styles.container}>
       <div className={styles.containerGrid}>
         <div className={styles.search}>
-          <h2><Image src="/manage-applications.svg" width="30" height="30" alt="Search not found" /> Manage Applications</h2>
+          <h2>
+            <Image src="/manage-applications.svg" width="30" height="30" alt="Search not found" />{' '}
+            Manage Applications
+          </h2>
           <SearchBar />
         </div>
         <div className={styles.logo}>
@@ -33,7 +36,7 @@ function CandidatesList() {
           </div>
         ) : (
           <div className={styles.list}>
-            <Table categories={categories} list={listData} />
+            <Table categories={categories} list={listData} customClass={styles.tableColumnsWidth} />
           </div>
         )}
       </div>

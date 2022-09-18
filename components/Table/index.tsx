@@ -9,10 +9,13 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FixedSizeList as List } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
 
 type TListParams = {
   list: TListData[];
   categories: {};
+  customClass: string;
 };
 
 type TCategoryProps = {
@@ -21,9 +24,37 @@ type TCategoryProps = {
   isFormattedDate: boolean;
 };
 
-function Table({ categories, list }: TListParams) {
+type TRowProps = {
+  data: any;
+  index: number;
+  style: any;
+};
+
+function Table({ categories, list, customClass }: TListParams) {
   const router = useRouter();
   const getYearsFromDate = (date: string) => moment().diff(date, 'years');
+
+  const renderedList = list?.map((item) => {
+    const mappedCategory = { name: 'name' };
+    const rowItems = Object.entries(categories).reduce((acc, [category, categoryProps]): any => {
+      const value = item[category as keyof typeof mappedCategory];
+
+      const { isNumberCell, isBadge, isFormattedDate } = categoryProps as TCategoryProps;
+
+      return [
+        ...acc,
+        <div key={category} className={cx(styles.td, { [styles.numberCell]: isNumberCell })}>
+          {isBadge ? <Badge status={value} /> : isFormattedDate ? getYearsFromDate(value) : value}
+        </div>
+      ];
+    }, []);
+
+    return (
+      <div key={item.name} className={cx(styles.tr, styles.tableRow, customClass)}>
+        {rowItems}
+      </div>
+    );
+  });
 
   return (
     <div className={styles.listTable}>
@@ -33,65 +64,44 @@ function Table({ categories, list }: TListParams) {
           <h4>No matching results found.</h4>
           <p>We&apos;re sorry! Please try another way.</p>
         </div>
-      ) : list ? (
-        <table>
-          <thead>
-            <tr>
+      ) : list.length > 0 ? (
+        <div className={styles.table}>
+          <div className={styles.thead}>
+            <div className={cx(styles.tr, customClass)}>
               {Object.entries(categories).map(
-                ([category, { value, isSortable, isNumberCell, columnWidth }]: (
-                  | string
-                  | any
-                )[]) => {
+                ([category, { value, isSortable, isNumberCell }]: (string | any)[]) => {
                   return (
-                    <th
+                    <div
                       key={category}
-                      style={{ width: columnWidth }}
-                      className={cx({ [styles.numberCell]: isNumberCell })}
+                      className={cx(styles.td, { [styles.numberCell]: isNumberCell })}
                     >
                       <div className={styles.tableHeadValue}>
                         {value}
                         {isSortable && <Sort sortType={category} />}
                       </div>
-                    </th>
+                    </div>
                   );
                 }
               )}
-            </tr>
-          </thead>
-          <tbody>
-            {list?.map((item) => {
-              const mappedCategory = { name: 'name' };
-              const rowItems = Object.entries(categories).reduce(
-                (acc, [category, categoryProps]): any => {
-                  const value = item[category as keyof typeof mappedCategory];
-
-                  const { isNumberCell, isBadge, isFormattedDate } =
-                    categoryProps as TCategoryProps;
-
-                  return [
-                    ...acc,
-                    <td key={category} className={cx({ [styles.numberCell]: isNumberCell })}>
-                      {isBadge ? (
-                        <Badge status={value} />
-                      ) : isFormattedDate ? (
-                        getYearsFromDate(value)
-                      ) : (
-                        value
-                      )}
-                    </td>
-                  ];
-                },
-                []
-              );
-
-              return (
-                <tr key={item.name} className={styles.tableRow}>
-                  {rowItems}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+            </div>
+          </div>
+          <div className={styles.tbody}>
+            <AutoSizer>
+              {({ height, width }) => (
+                <List
+                  className="List"
+                  height={height}
+                  itemData={renderedList}
+                  itemCount={renderedList.length}
+                  itemSize={45}
+                  width={width}
+                >
+                  {({ data, index, style }: TRowProps) => <div style={style}>{data[index]}</div>}
+                </List>
+              )}
+            </AutoSizer>
+          </div>
+        </div>
       ) : (
         ''
       )}
@@ -104,10 +114,10 @@ Table.propTypes = {
     value: PropTypes.string,
     isSortable: PropTypes.bool,
     isNumberCell: PropTypes.bool,
-    isBadge: PropTypes.bool,
-    columnWidth: PropTypes.string
+    isBadge: PropTypes.bool
   }).isRequired,
-  list: PropTypes.array.isRequired
+  list: PropTypes.array.isRequired,
+  customClass: PropTypes.string
 };
 
 export default Table;

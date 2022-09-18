@@ -23,8 +23,8 @@
 
     .list {
       grid-area: list;
-      overflow: scroll;
-      padding: 20px;
+      padding: 20px 20px 0;
+      overflow: hidden;
     }
 
     .search {
@@ -89,4 +89,10 @@
       }
     }
   }
+}
+
+.tableColumnsWidth {
+  display: grid;
+  grid-template-columns: 14% 15% 14% 17% 14% 15% 9%;
+  align-items: center;
 }

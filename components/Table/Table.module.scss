@@ -1,6 +1,7 @@
 .listTable {
   display: flex;
   justify-content: center;
+  height: 100%;
 
   .notFound {
     grid-area: list;
@@ -18,17 +19,12 @@
     }
   }
 
-  table {
+  .table {
     width: 100%;
     border-collapse: collapse;
-
-    tbody tr:hover td,
-    .table tbody tr:hover th {
-      background-color: #f2fbfd;
-    }
   }
 
-  th {
+  .th {
     text-align: left;
     padding-right: 24px;
     color: #3fafcb;
@@ -41,7 +37,7 @@
     }
   }
 
-  tr {
+  .tr {
     border-bottom: 1px solid #e8e8e8;
     font-size: 0.9rem;
     height: 45px;
@@ -57,15 +53,18 @@
     }
   }
 
-  tbody {
+  .tbody {
+    height: 100%;
+    margin-right: -4px;
+
     tr {
       &:hover {
-        background-color: #eee;
+        background-color: #f2fbfd;
       }
     }
   }
 
-  td {
+  .td {
     color: #595959;
     padding-right: 24px;
   }
