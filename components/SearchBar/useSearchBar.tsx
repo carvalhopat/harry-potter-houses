@@ -35,8 +35,7 @@ function useSearchBar() {
 
     localStorage.setItem('termType', termType);
 
-    const { push } = router;
-    push({ query: { ...router.query, termType: termType } });
+    router.push({ query: { ...router.query, termType: termType } });
   };
 
   return {

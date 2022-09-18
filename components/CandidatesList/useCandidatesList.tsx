@@ -10,7 +10,7 @@ function useCandidatesList() {
 
   const router = useRouter();
   const { query } = router;
-  const { termType, sort = 'asc', sortType = 'name' } = query;
+  const { termType = 'name', sort = 'asc', sortType = 'name', page = 1 } = query;
 
   const fetchCandidatesList = useCallback(() => {
     setIsLoading(true);

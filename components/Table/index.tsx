@@ -33,7 +33,7 @@ function Table({ categories, list }: TListParams) {
           <h4>No matching results found.</h4>
           <p>We&apos;re sorry! Please try another way.</p>
         </div>
-      ) : (
+      ) : list ? (
         <table>
           <thead>
             <tr>
@@ -59,20 +59,30 @@ function Table({ categories, list }: TListParams) {
             </tr>
           </thead>
           <tbody>
-            {list.map((item) => {
-              const mappedTermTypes = {name: 'name'};
-              const rowItems = Object.entries(categories).reduce((acc, [category, categoryProps]): any => {
-                const value = item[category as keyof typeof mappedTermTypes];
+            {list?.map((item) => {
+              const mappedCategory = { name: 'name' };
+              const rowItems = Object.entries(categories).reduce(
+                (acc, [category, categoryProps]): any => {
+                  const value = item[category as keyof typeof mappedCategory];
 
-                const { isNumberCell, isBadge, isFormattedDate } = categoryProps as TCategoryProps;
+                  const { isNumberCell, isBadge, isFormattedDate } =
+                    categoryProps as TCategoryProps;
 
-                return [
-                  ...acc,
-                  <td key={category} className={cx({ [styles.numberCell]: isNumberCell })}>
-                    {isBadge? <Badge status={value}/> : isFormattedDate? getYearsFromDate(value) : value}
-                  </td>
-                ];
-              }, []);
+                  return [
+                    ...acc,
+                    <td key={category} className={cx({ [styles.numberCell]: isNumberCell })}>
+                      {isBadge ? (
+                        <Badge status={value} />
+                      ) : isFormattedDate ? (
+                        getYearsFromDate(value)
+                      ) : (
+                        value
+                      )}
+                    </td>
+                  ];
+                },
+                []
+              );
 
               return (
                 <tr key={item.name} className={styles.tableRow}>
@@ -82,6 +92,8 @@ function Table({ categories, list }: TListParams) {
             })}
           </tbody>
         </table>
+      ) : (
+        ''
       )}
     </div>
   );
