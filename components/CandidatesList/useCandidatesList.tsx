@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import api from '../../helpers/axiosInstance';
+import fetchHousesList from '../../helpers/fetchHousesList';
 
 function useCandidatesList() {
   const [listData, setListData] = useState([] as any);
@@ -10,9 +11,15 @@ function useCandidatesList() {
 
   const router = useRouter();
   const { query } = router;
-  const { termType = 'name', sort = 'asc', sortType = 'name', page = 1 } = query;
+  const {
+    termType = 'name',
+    sort = 'asc',
+    sortType = 'name',
+    page = 1,
+    house = 'gryffindor'
+  } = query;
 
-  const fetchCandidatesList = useCallback(() => {
+  const fetchHousesData = useCallback(() => {
     setIsLoading(true);
     api
       .get('/api/candidates', {
@@ -20,19 +27,20 @@ function useCandidatesList() {
           query: query?.q,
           termType,
           sort,
-          sortType
+          sortType,
+          house
         }
       })
       .then(({ data }) => setListData(data))
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));
-  }, [termType, query, sort, sortType]);
+  }, [termType, query, sort, sortType, house]);
 
   useEffect(() => {
     if (router.isReady) {
-      fetchCandidatesList();
+      fetchHousesData();
     }
-  }, [fetchCandidatesList, router?.isReady]);
+  }, [fetchHousesData, router?.isReady]);
 
   const Table = dynamic(() => import('../Table'), { ssr: false });
 

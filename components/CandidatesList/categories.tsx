@@ -1,32 +1,33 @@
+import React from 'react';
+
 const categories = {
   name: {
     value: 'Name'
   },
-  email: {
-    value: 'Email'
+  alternate_names: {
+    value: 'Alternative names'
   },
-  birth_date: {
-    value: 'Age',
-    isNumberCell: true,
-    isFormattedDate: true
+  species: {
+    value: 'Species'
   },
-  year_of_experience: {
-    value: 'Years of experience',
-    isNumberCell: true,
-    isSortable: true
+  gender: {
+    value: 'Gender'
   },
-  position_applied: {
-    value: 'Position applied',
-    isSortable: true
+  dateOfBirth: {
+    value: 'Date of Birth'
   },
-  application_date: {
-    value: 'Date of application',
-    isNumberCell: true,
-    isSortable: true
+  // wand: {
+  //   value: 'Wand',
+  //   formatter: ({ item: { wand } }) => {
+  //     return <div>{wand.wood}</div>;
+  //   }
+  // },
+  patronus: {
+    value: 'Patronus'
   },
-  status: {
-    value: 'Status',
-    isBadge: true
+  wizard: {
+    value: 'Wizard',
+    formatter: ({ item }) => (item.wizard ? 'true' : 'false')
   }
 };
 

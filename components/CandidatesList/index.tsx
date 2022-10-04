@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import categories from './categories';
 import React from 'react';
+import Houses from '../Houses';
 
 function CandidatesList() {
   const { Table, isLoading, listData, error } = useCandidatesList();
@@ -19,9 +20,10 @@ function CandidatesList() {
           </h2>
           <SearchBar />
         </div>
+        <Houses />
         <div className={styles.logo}>
-          <Link href="https://www.personio.com/">
-            <Image src="/personio_logo.svg" width="120" height="30" alt="Personio Logo" />
+          <Link href="https://">
+            <Image src="/logo.svg" width="120" height="30" alt="Logo" />
           </Link>
         </div>
         {isLoading ? (

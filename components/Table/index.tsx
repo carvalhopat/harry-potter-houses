@@ -20,8 +20,7 @@ type TListParams = {
 
 type TCategoryProps = {
   isNumberCell: boolean;
-  isBadge: boolean;
-  isFormattedDate: boolean;
+  formatter: (item) => {};
 };
 
 type TRowProps = {
@@ -32,19 +31,19 @@ type TRowProps = {
 
 function Table({ categories, list, customClass }: TListParams) {
   const router = useRouter();
-  const getYearsFromDate = (date: string) => moment().diff(date, 'years');
 
   const renderedList = list?.map((item) => {
     const mappedCategory = { name: 'name' };
     const rowItems = Object.entries(categories).reduce((acc, [category, categoryProps]): any => {
       const value = item[category as keyof typeof mappedCategory];
 
-      const { isNumberCell, isBadge, isFormattedDate } = categoryProps as TCategoryProps;
+      const { isNumberCell, formatter } = categoryProps as TCategoryProps;
+      const formattedValue = formatter ? formatter({ item }) : value;
 
       return [
         ...acc,
         <div key={category} className={cx(styles.td, { [styles.numberCell]: isNumberCell })}>
-          {isBadge ? <Badge status={value} /> : isFormattedDate ? getYearsFromDate(value) : value}
+          {isEmpty(formattedValue) ? '-' : formattedValue}
         </div>
       ];
     }, []);
