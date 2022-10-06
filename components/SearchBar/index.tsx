@@ -20,8 +20,12 @@ function SearchBar() {
           value={currentTermTypeValue || ''}
           onChange={(e) => onChooseTermType(e)}
         >
-          <option data-testid="select-option-name" value="name">Filter by name</option>
-          <option data-testid="select-option-status" value="status">Filter by status</option>
+          <option data-testid="select-option-name" value="name">
+            Filter by Name
+          </option>
+          <option data-testid="select-option-species" value="species">
+            Filter by Species
+          </option>
         </select>
       </div>
 

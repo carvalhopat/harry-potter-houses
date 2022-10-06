@@ -24,7 +24,7 @@
     .list {
       grid-area: list;
       padding: 20px 20px 0;
-      overflow: hidden;
+      overflow-y: auto;
     }
 
     .search {

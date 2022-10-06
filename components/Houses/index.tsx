@@ -17,7 +17,7 @@ function Houses() {
       <button
         key={id}
         className={styles[color]}
-        onClick={() => router.push({ query: { ...router.query, house: 'ravenclaw' } })}
+        onClick={() => router.push({ query: { ...router.query, house, page: 1 } })}
       >
         {house}
       </button>

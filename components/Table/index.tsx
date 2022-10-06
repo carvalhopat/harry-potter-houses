@@ -6,11 +6,8 @@ import Image from 'next/image';
 import Sort from './Sort';
 import cx from 'classnames';
 import { useRouter } from 'next/router';
-import moment from 'moment';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FixedSizeList as List } from 'react-window';
-import AutoSizer from 'react-virtualized-auto-sizer';
 
 type TListParams = {
   list: TListData[];
@@ -31,29 +28,6 @@ type TRowProps = {
 
 function Table({ categories, list, customClass }: TListParams) {
   const router = useRouter();
-
-  const renderedList = list?.map((item) => {
-    const mappedCategory = { name: 'name' };
-    const rowItems = Object.entries(categories).reduce((acc, [category, categoryProps]): any => {
-      const value = item[category as keyof typeof mappedCategory];
-
-      const { isNumberCell, formatter } = categoryProps as TCategoryProps;
-      const formattedValue = formatter ? formatter({ item }) : value;
-
-      return [
-        ...acc,
-        <div key={category} className={cx(styles.td, { [styles.numberCell]: isNumberCell })}>
-          {isEmpty(formattedValue) ? '-' : formattedValue}
-        </div>
-      ];
-    }, []);
-
-    return (
-      <div key={item.name} className={cx(styles.tr, styles.tableRow, customClass)}>
-        {rowItems}
-      </div>
-    );
-  });
 
   return (
     <div className={styles.listTable}>
@@ -85,20 +59,34 @@ function Table({ categories, list, customClass }: TListParams) {
             </div>
           </div>
           <div className={styles.tbody}>
-            <AutoSizer>
-              {({ height, width }) => (
-                <List
-                  className="List"
-                  height={height}
-                  itemData={renderedList}
-                  itemCount={renderedList.length}
-                  itemSize={45}
-                  width={width}
-                >
-                  {({ data, index, style }: TRowProps) => <div style={style}>{data[index]}</div>}
-                </List>
-              )}
-            </AutoSizer>
+            {list?.map((item) => {
+              const mappedCategory = { name: 'name' };
+              const rowItems = Object.entries(categories).reduce(
+                (acc, [category, categoryProps]): any => {
+                  const value = item[category as keyof typeof mappedCategory];
+
+                  const { isNumberCell, formatter } = categoryProps as TCategoryProps;
+                  const formattedValue = formatter ? formatter({ item }) : value;
+
+                  return [
+                    ...acc,
+                    <div
+                      key={category}
+                      className={cx(styles.td, { [styles.numberCell]: isNumberCell })}
+                    >
+                      {isEmpty(formattedValue) ? '-' : formattedValue}
+                    </div>
+                  ];
+                },
+                []
+              );
+
+              return (
+                <div key={item.name} className={cx(styles.tr, styles.tableRow, customClass)}>
+                  {rowItems}
+                </div>
+              );
+            })}
           </div>
         </div>
       ) : (

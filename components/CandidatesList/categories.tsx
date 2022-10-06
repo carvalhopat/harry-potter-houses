@@ -16,12 +16,6 @@ const categories = {
   dateOfBirth: {
     value: 'Date of Birth'
   },
-  // wand: {
-  //   value: 'Wand',
-  //   formatter: ({ item: { wand } }) => {
-  //     return <div>{wand.wood}</div>;
-  //   }
-  // },
   patronus: {
     value: 'Patronus'
   },

@@ -16,6 +16,7 @@ function useCandidatesList() {
     sort = 'asc',
     sortType = 'name',
     page = 1,
+    pageSize = 7,
     house = 'gryffindor'
   } = query;
 
@@ -28,13 +29,15 @@ function useCandidatesList() {
           termType,
           sort,
           sortType,
+          page,
+          pageSize,
           house
         }
       })
       .then(({ data }) => setListData(data))
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));
-  }, [termType, query, sort, sortType, house]);
+  }, [termType, query, sort, sortType, house, page, pageSize]);
 
   useEffect(() => {
     if (router.isReady) {
@@ -49,7 +52,7 @@ function useCandidatesList() {
     isLoading,
     listData,
     error: !!error,
-    setListData
+    onPageChange: ({ selected }) => router.push({ query: { ...router.query, page: selected + 1 } })
   };
 }
 
