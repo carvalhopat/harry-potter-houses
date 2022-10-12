@@ -29,32 +29,21 @@ function useSearchBar() {
     debounced();
   };
 
-  // const onChooseTermType = (e: React.FormEvent<HTMLSelectElement>) => {
-  //   e.preventDefault();
-  //   const target = e.target as HTMLTextAreaElement;
-  //   const termType = target.value;
-
-  //   localStorage.setItem('termType', termType);
-
-  //   router.push({ query: { ...router.query, termType: termType } });
-  // };
-
   const onChooseTermType = (termType) => {
-    // e.preventDefault();
-    // const target = e.target as HTMLTextAreaElement;
-    // const termType = target.value;
-
     localStorage.setItem('termType', termType);
 
     router.push({ query: { ...router.query, termType: termType } });
   };
+
+  const menuOptions = ['Name', 'Species'].filter((type) => type !== currentTermTypeValue);
 
   return {
     onSearchSubmit,
     onChooseTermType,
     onSearchTerm,
     currentSearchedValue,
-    currentTermTypeValue
+    currentTermTypeValue,
+    menuOptions
   };
 }
 

@@ -2,6 +2,8 @@ import useSearchBar from './useSearchBar';
 import styles from './SearchBar.module.scss';
 import React, { useState } from 'react';
 import Image from 'next/image';
+import cx from 'classnames';
+import MenuDropdown from '../MenuDropdown';
 
 function SearchBar() {
   const {
@@ -9,33 +11,28 @@ function SearchBar() {
     onChooseTermType,
     onSearchTerm,
     currentSearchedValue,
-    currentTermTypeValue
+    currentTermTypeValue,
+    menuOptions
   } = useSearchBar();
-
-  const [mostrar, setMostrar] = useState(false);
-  const lista = ['Name', 'Species'].filter((type) => type !== currentTermTypeValue);
 
   return (
     <div className={styles.searchBar}>
       <div className={styles.termType}>
-        <div className={styles.selectedOption} onClick={() => setMostrar(!mostrar)}>
-          Filter by {currentTermTypeValue}
-          <Image src="/arrow-down.svg" width="10" height="10" alt="Open house's menu" />
-        </div>
-        {mostrar &&
-          lista.map((type) => (
+        <MenuDropdown
+          selectedOption={`Filter by ${currentTermTypeValue}`}
+          customClass={cx(styles.selectedOption)}
+        >
+          {menuOptions.map((type) => (
             <div
-              className={styles.menuOptions}
+              //className={cx(styles.menuOptions, { [styles.showMenu]: showMenu })}
               key={type}
-              onClick={() => {
-                onChooseTermType(type);
-                setMostrar(false);
-              }}
+              onClick={() => onChooseTermType(type)}
               data-testid={`select-option-${type}`}
             >
               {type}
             </div>
           ))}
+        </MenuDropdown>
       </div>
 
       <form onSubmit={(e) => onSearchSubmit(e)}>

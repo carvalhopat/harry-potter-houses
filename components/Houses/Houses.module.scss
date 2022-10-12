@@ -1,8 +1,6 @@
 @mixin button($lighterColor, $darkerColor) {
-  //border: 1px solid $lighterColor;
   background-color: $lighterColor;
   color: $darkerColor;
-  //color: $lighterColor;
 
   &:hover {
     opacity: 0.8;
@@ -12,13 +10,6 @@
   &:focus {
     opacity: 0.3;
     transition: 0.3s;
-  }
-
-  span {
-    filter: grayscale(100%) brightness(120%) sepia(90%) hue-rotate(5deg) saturate(500%)
-      contrast(0.7);
-    -webkit-filter: grayscale(100%) brightness(120%) sepia(90%) hue-rotate(5deg) saturate(500%)
-      contrast(0.7);
   }
 }
 
@@ -33,30 +24,6 @@
     justify-content: space-between;
     padding: 8px;
     cursor: pointer;
-
-    svg {
-      fill: #fff;
-    }
-  }
-
-  .menuOptions {
-    position: absolute;
-    display: flex;
-    width: 140px;
-    gap: 6px;
-    flex-direction: column;
-    background-color: #fff;
-    padding: 8px;
-    top: 100%;
-    border-radius: 2px;
-    transition: 0.3s;
-    box-shadow: 0 2px 6px rgb(0 0 0 / 16%);
-    opacity: 0;
-  }
-
-  .showMenu {
-    opacity: 1;
-    top: 125%;
   }
 
   .houseButton {

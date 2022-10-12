@@ -12,29 +12,12 @@
       background-color: #f7d98e;
       font-size: 0.95rem;
       border-radius: 2px;
-      width: 130px;
+      width: 140px;
       display: flex;
       justify-content: space-between;
       padding: 6px 8px;
       cursor: pointer;
       color: #c99b25;
-
-      span {
-        filter: grayscale(100%) brightness(120%) sepia(90%) hue-rotate(5deg) saturate(500%)
-          contrast(0.7);
-        -webkit-filter: grayscale(100%) brightness(120%) sepia(90%) hue-rotate(5deg) saturate(500%)
-          contrast(0.7);
-      }
-    }
-
-    .menuOptions {
-      position: absolute;
-      background-color: #fff;
-      padding: 8px 12px;
-      right: -3px;
-      top: 100%;
-      border: 1px solid #eee;
-      cursor: pointer;
     }
   }
 

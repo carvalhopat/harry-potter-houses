@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from './CandidatesList.module.scss';
 import SearchBar from '../SearchBar';
 import useCandidatesList from './useCandidatesList';
@@ -22,13 +23,7 @@ function CandidatesList() {
               </div>{' '}
               <p>
                 houses &nbsp;list
-                <img
-                  src="/lightning.svg"
-                  //className={styles.lightning}
-                  width="18"
-                  height="18"
-                  alt="Lightning"
-                />
+                <img src="/lightning.svg" width="18" height="18" alt="Lightning" />
               </p>
             </div>
             <div className={styles.search}>
