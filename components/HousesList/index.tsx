@@ -1,15 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
-import styles from './CandidatesList.module.scss';
+import styles from './HousesList.module.scss';
 import SearchBar from '../SearchBar';
-import useCandidatesList from './useCandidatesList';
+import useHousesList from './useHousesList';
 import Image from 'next/image';
 import categories from './categories';
 import React from 'react';
 import Houses from '../Houses';
 import Pagination from '../Pagination';
 
+type teste = {
+  value: string;
+  isSortable?: boolean;
+  isNumberCell?: boolean;
+  formatter?: (item) => {};
+}[];
+
 function CandidatesList() {
-  const { Table, isLoading, listData, error, onPageChange } = useCandidatesList();
+  const { Table, isLoading, listData, error, onPageChange } = useHousesList();
 
   return (
     <>

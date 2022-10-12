@@ -1,11 +1,18 @@
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import api from '../../helpers/axiosInstance';
-import fetchHousesList from '../../helpers/fetchHousesList';
+
+type THPList = {
+  data: [];
+  totalCount: [];
+};
 
 function useCandidatesList() {
-  const [listData, setListData] = useState([] as any);
+  const [listData, setListData] = useState<THPList>({
+    data: [],
+    totalCount: []
+  });
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -23,7 +30,7 @@ function useCandidatesList() {
   const fetchHousesData = useCallback(() => {
     setIsLoading(true);
     api
-      .get('/api/candidates', {
+      .get('/api/hpHouses', {
         params: {
           query: query?.q,
           termType,

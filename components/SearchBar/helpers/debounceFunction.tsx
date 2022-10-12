@@ -1,4 +1,4 @@
-function debounceFunction(fn: any, delay: number) {
+function debounceFunction(fn: () => {}, delay: number) {
   let timeoutId: ReturnType<typeof setTimeout>;
   return (...args: []) => {
     if (timeoutId) {

@@ -1,29 +1,23 @@
 import TListData from '../../types/TListData';
 import { isEmpty } from 'ramda';
 import styles from './Table.module.scss';
-import Badge from './Badge';
 import Image from 'next/image';
 import Sort from './Sort';
 import cx from 'classnames';
 import { useRouter } from 'next/router';
 import React from 'react';
-import PropTypes from 'prop-types';
 
 type TListParams = {
   list: TListData[];
-  categories: {};
+  categories: {
+    [key: string]: {
+      value: string;
+      isSortable?: boolean;
+      isNumberCell?: boolean;
+      formatter?: (item) => {};
+    };
+  };
   customClass: string;
-};
-
-type TCategoryProps = {
-  isNumberCell: boolean;
-  formatter: (item) => {};
-};
-
-type TRowProps = {
-  data: any;
-  index: number;
-  style: any;
 };
 
 function Table({ categories, list, customClass }: TListParams) {
@@ -40,28 +34,23 @@ function Table({ categories, list, customClass }: TListParams) {
       ) : list.length > 0 ? (
         <div className={styles.table}>
           <div className={cx(styles.thead, customClass)}>
-            {Object.entries(categories).map(
-              ([category, { value, isSortable, isNumberCell }]: (string | any)[]) => {
-                return (
-                  <div
-                    key={category}
-                    className={cx(styles.theadValue, { [styles.numberCell]: isNumberCell })}
-                  >
-                    {value}
-                    {isSortable && <Sort sortType={category} />}
-                  </div>
-                );
-              }
-            )}
+            {Object.entries(categories).map(([category, { value, isSortable, isNumberCell }]) => {
+              return (
+                <div
+                  key={category}
+                  className={cx(styles.theadValue, { [styles.numberCell]: isNumberCell })}
+                >
+                  {value}
+                  {isSortable && <Sort sortType={category} />}
+                </div>
+              );
+            })}
           </div>
           <div className={styles.tbody}>
             {list?.map((item) => {
-              const mappedCategory = { name: 'name' };
               const rowItems = Object.entries(categories).reduce(
-                (acc, [category, categoryProps]): any => {
-                  const value = item[category as keyof typeof mappedCategory];
-
-                  const { isNumberCell, formatter } = categoryProps as TCategoryProps;
+                (acc, [category, { isNumberCell, formatter }]) => {
+                  const value = item[category];
                   const formattedValue = formatter ? formatter({ item }) : value;
 
                   return [
@@ -71,7 +60,7 @@ function Table({ categories, list, customClass }: TListParams) {
                     </div>
                   ];
                 },
-                []
+                [] as any
               );
 
               return (
@@ -88,16 +77,5 @@ function Table({ categories, list, customClass }: TListParams) {
     </div>
   );
 }
-
-Table.propTypes = {
-  categories: PropTypes.shape({
-    value: PropTypes.string,
-    isSortable: PropTypes.bool,
-    isNumberCell: PropTypes.bool,
-    isBadge: PropTypes.bool
-  }).isRequired,
-  list: PropTypes.array.isRequired,
-  customClass: PropTypes.string
-};
 
 export default Table;

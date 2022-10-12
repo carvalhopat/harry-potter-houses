@@ -1,6 +1,7 @@
 .menuOptions {
   position: absolute;
   display: flex;
+  z-index: 1;
   width: 100%;
   gap: 6px;
   flex-direction: column;

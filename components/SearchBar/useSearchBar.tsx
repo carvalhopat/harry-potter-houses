@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import debounceFunction from './helpers/debounceFunction';
 
 function useSearchBar() {
-  let debounced: ((...args: any[]) => Promise<unknown>) | (() => void) | null = null;
+  let debounced: ((...args: []) => Promise<unknown>) | (() => void) | null = null;
 
   const router = useRouter();
   const currentSearchedValue = router.query.q || '';
@@ -35,7 +35,7 @@ function useSearchBar() {
     router.push({ query: { ...router.query, termType: termType } });
   };
 
-  const menuOptions = ['Name', 'Species'].filter((type) => type !== currentTermTypeValue);
+  const menuOptions = ['name', 'species'].filter((type) => type !== currentTermTypeValue);
 
   return {
     onSearchSubmit,

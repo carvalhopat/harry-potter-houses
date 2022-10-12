@@ -1,5 +1,5 @@
 function sortList(sortType: string) {
-  return function (a: any, b: any) {
+  return function (a: string, b: string) {
     if (a[sortType] < b[sortType]) {
       return -1;
     }

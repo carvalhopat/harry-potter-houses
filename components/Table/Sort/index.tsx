@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import styles from './Sort.module.scss';
-import PropTypes from 'prop-types';
 import Image from 'next/image';
 import cx from 'classnames';
 import React from 'react';
@@ -34,10 +33,5 @@ function Sort({ sortType }: TSortParams) {
     </div>
   );
 }
-
-Sort.propTypes = {
-  sortType: PropTypes.oneOf(['position_applied', 'year_of_experience', 'application_date'])
-    .isRequired
-};
 
 export default Sort;

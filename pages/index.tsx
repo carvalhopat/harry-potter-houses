@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import CandidatesList from '../components/CandidatesList';
+import HousesList from '../components/HousesList';
 import React from 'react';
 
 const Home: NextPage = () => {
@@ -12,7 +12,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="favicon.svg" />
       </Head>
 
-      <CandidatesList />
+      <HousesList />
     </>
   );
 };

@@ -32,8 +32,8 @@ const categories = {
       ) : (
         <Image src="/false-icon.svg" width="12" height="12" alt="False icon" />
       )
-      // }
-      /* </div> */
+    // }
+    /* </div> */
   }
 };
 
