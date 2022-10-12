@@ -1,6 +1,7 @@
 import useSearchBar from './useSearchBar';
 import styles from './SearchBar.module.scss';
-import React from 'react';
+import React, { useState } from 'react';
+import Image from 'next/image';
 
 function SearchBar() {
   const {
@@ -11,22 +12,30 @@ function SearchBar() {
     currentTermTypeValue
   } = useSearchBar();
 
+  const [mostrar, setMostrar] = useState(false);
+  const lista = ['Name', 'Species'].filter((type) => type !== currentTermTypeValue);
+
   return (
     <div className={styles.searchBar}>
       <div className={styles.termType}>
-        <select
-          name="termType"
-          id="termType"
-          value={currentTermTypeValue || ''}
-          onChange={(e) => onChooseTermType(e)}
-        >
-          <option data-testid="select-option-name" value="name">
-            Filter by Name
-          </option>
-          <option data-testid="select-option-species" value="species">
-            Filter by Species
-          </option>
-        </select>
+        <div className={styles.selectedOption} onClick={() => setMostrar(!mostrar)}>
+          Filter by {currentTermTypeValue}
+          <Image src="/arrow-down.svg" width="10" height="10" alt="Open house's menu" />
+        </div>
+        {mostrar &&
+          lista.map((type) => (
+            <div
+              className={styles.menuOptions}
+              key={type}
+              onClick={() => {
+                onChooseTermType(type);
+                setMostrar(false);
+              }}
+              data-testid={`select-option-${type}`}
+            >
+              {type}
+            </div>
+          ))}
       </div>
 
       <form onSubmit={(e) => onSearchSubmit(e)}>

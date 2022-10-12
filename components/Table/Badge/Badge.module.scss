@@ -5,7 +5,7 @@
   & > div {
     padding: 4px;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 0.9rem;
   }
 
   .waiting {
@@ -14,12 +14,12 @@
   }
 
   .approved {
-    border: 1px solid #17B637;
-    color: #17B637;
+    border: 1px solid #17b637;
+    color: #17b637;
   }
 
   .rejected {
-    border: 1px solid #E84736;
-    color: #E84736;
+    border: 1px solid #e84736;
+    color: #e84736;
   }
 }

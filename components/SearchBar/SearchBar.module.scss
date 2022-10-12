@@ -1,29 +1,43 @@
 .searchBar {
   display: flex;
+  align-items: center;
 
-  .termType select {
-    background-color: #e7e7e7;
-    color: #a1a1a1;
-    font-weight: 600;
-    padding: 4px 0px 4px 8px;
-    width: 122px;
-    border: 0;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    height: 28px;
+  .termType {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 4px;
 
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    background-image: url('../../public/arrow-down.svg');
-    background-repeat: no-repeat, repeat;
-    background-position: right 0.5rem top 55%, 0 0;
-    background-size: 0.65em auto, 100%;
+    .selectedOption {
+      background-color: #f7d98e;
+      font-size: 0.95rem;
+      border-radius: 2px;
+      width: 130px;
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 8px;
+      cursor: pointer;
+      color: #c99b25;
 
-    &:focus {
-      outline: 0;
+      span {
+        filter: grayscale(100%) brightness(120%) sepia(90%) hue-rotate(5deg) saturate(500%)
+          contrast(0.7);
+        -webkit-filter: grayscale(100%) brightness(120%) sepia(90%) hue-rotate(5deg) saturate(500%)
+          contrast(0.7);
+      }
+    }
+
+    .menuOptions {
+      position: absolute;
+      background-color: #fff;
+      padding: 8px 12px;
+      right: -3px;
+      top: 100%;
+      border: 1px solid #eee;
+      cursor: pointer;
     }
   }
+
   form {
     width: 100%;
   }
@@ -31,13 +45,12 @@
   form input {
     height: 28px;
     border-radius: 0;
-    width: 200px;
+    width: 230px;
     border-width: 1px;
     border-bottom-right-radius: 3px;
     border-top-right-radius: 3px;
     padding-left: 4px;
-    border: 1px solid #e8e8e8;
-    width: 100%;
+    border: none;
 
     &:focus {
       outline: 0;
@@ -51,9 +64,9 @@
 
   :-ms-input-placeholder {
     color: #bbb;
-   }
-   
-   ::-ms-input-placeholder {
-    color:#bbb;
-   }
+  }
+
+  ::-ms-input-placeholder {
+    color: #bbb;
+  }
 }

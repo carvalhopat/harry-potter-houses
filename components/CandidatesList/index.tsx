@@ -2,7 +2,6 @@ import styles from './CandidatesList.module.scss';
 import SearchBar from '../SearchBar';
 import useCandidatesList from './useCandidatesList';
 import Image from 'next/image';
-import Link from 'next/link';
 import categories from './categories';
 import React from 'react';
 import Houses from '../Houses';
@@ -15,19 +14,32 @@ function CandidatesList() {
     <>
       <div className={styles.container}>
         <div className={styles.containerGrid}>
-          <div className={styles.search}>
-            <h2>
-              <Image src="/manage-applications.svg" width="30" height="30" alt="Search not found" />{' '}
-              Manage Applications
-            </h2>
-            <Houses />
-            <SearchBar />
-          </div>
-
-          <div className={styles.logo}>
-            <Link href="https://">
-              <Image src="/logo.svg" width="120" height="30" alt="Logo" />
-            </Link>
+          <div className={styles.header}>
+            <div className={styles.logo}>
+              <div className={styles.title}>
+                <Image src="/glasses.svg" width="35" height="17" alt="Harry's glasses" />
+                Harry Potter
+              </div>{' '}
+              <p>
+                houses &nbsp;list
+                <img
+                  src="/lightning.svg"
+                  //className={styles.lightning}
+                  width="18"
+                  height="18"
+                  alt="Lightning"
+                />
+              </p>
+            </div>
+            <div className={styles.search}>
+              {/* <p className={styles.description}>Choose a filter:</p> */}
+              <SearchBar />
+            </div>
+            <div className={styles.divider}></div>
+            <div className={styles.house}>
+              {/* <p className={styles.description}>Choose a house:</p> */}
+              <Houses />
+            </div>
           </div>
           {isLoading ? (
             <div className={styles.loaderWrapper}>

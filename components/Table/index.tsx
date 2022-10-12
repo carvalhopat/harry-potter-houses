@@ -39,24 +39,20 @@ function Table({ categories, list, customClass }: TListParams) {
         </div>
       ) : list.length > 0 ? (
         <div className={styles.table}>
-          <div className={styles.thead}>
-            <div className={cx(styles.tr, customClass)}>
-              {Object.entries(categories).map(
-                ([category, { value, isSortable, isNumberCell }]: (string | any)[]) => {
-                  return (
-                    <div
-                      key={category}
-                      className={cx(styles.td, { [styles.numberCell]: isNumberCell })}
-                    >
-                      <div className={styles.tableHeadValue}>
-                        {value}
-                        {isSortable && <Sort sortType={category} />}
-                      </div>
-                    </div>
-                  );
-                }
-              )}
-            </div>
+          <div className={cx(styles.thead, customClass)}>
+            {Object.entries(categories).map(
+              ([category, { value, isSortable, isNumberCell }]: (string | any)[]) => {
+                return (
+                  <div
+                    key={category}
+                    className={cx(styles.theadValue, { [styles.numberCell]: isNumberCell })}
+                  >
+                    {value}
+                    {isSortable && <Sort sortType={category} />}
+                  </div>
+                );
+              }
+            )}
           </div>
           <div className={styles.tbody}>
             {list?.map((item) => {
@@ -70,10 +66,7 @@ function Table({ categories, list, customClass }: TListParams) {
 
                   return [
                     ...acc,
-                    <div
-                      key={category}
-                      className={cx(styles.td, { [styles.numberCell]: isNumberCell })}
-                    >
+                    <div key={category} className={cx({ [styles.numberCell]: isNumberCell })}>
                       {isEmpty(formattedValue) ? '-' : formattedValue}
                     </div>
                   ];
@@ -82,7 +75,7 @@ function Table({ categories, list, customClass }: TListParams) {
               );
 
               return (
-                <div key={item.name} className={cx(styles.tr, styles.tableRow, customClass)}>
+                <div key={item.name} className={cx(styles.tableRow, customClass)}>
                   {rowItems}
                 </div>
               );

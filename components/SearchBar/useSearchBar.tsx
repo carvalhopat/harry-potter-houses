@@ -6,7 +6,8 @@ function useSearchBar() {
 
   const router = useRouter();
   const currentSearchedValue = router.query.q || '';
-  const currentTermTypeValue = typeof window !== 'undefined' && localStorage.getItem('termType');
+  const currentTermTypeValue =
+    (typeof window !== 'undefined' && localStorage.getItem('termType')) || 'Name';
 
   const onSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,10 +29,20 @@ function useSearchBar() {
     debounced();
   };
 
-  const onChooseTermType = (e: React.FormEvent<HTMLSelectElement>) => {
-    e.preventDefault();
-    const target = e.target as HTMLTextAreaElement;
-    const termType = target.value;
+  // const onChooseTermType = (e: React.FormEvent<HTMLSelectElement>) => {
+  //   e.preventDefault();
+  //   const target = e.target as HTMLTextAreaElement;
+  //   const termType = target.value;
+
+  //   localStorage.setItem('termType', termType);
+
+  //   router.push({ query: { ...router.query, termType: termType } });
+  // };
+
+  const onChooseTermType = (termType) => {
+    // e.preventDefault();
+    // const target = e.target as HTMLTextAreaElement;
+    // const termType = target.value;
 
     localStorage.setItem('termType', termType);
 

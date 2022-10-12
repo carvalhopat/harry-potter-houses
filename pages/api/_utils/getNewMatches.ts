@@ -13,7 +13,10 @@ const mappedTermTypes = {
 
 function getNewMatches({ query, data, termType }: TNewMatchesParams) {
   return data?.filter((item: any) => {
-    return includes(query, item[termType as keyof typeof mappedTermTypes].toLowerCase());
+    return includes(
+      query.toLowerCase().trim(),
+      item[termType as keyof typeof mappedTermTypes].toLowerCase()
+    );
   });
 }
 

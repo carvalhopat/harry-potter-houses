@@ -1,6 +1,5 @@
 .container {
   margin: 30px 80px;
-  border: 1px solid #e8e8e8;
   background-color: #fff;
   height: 80vh;
   display: flex;
@@ -9,49 +8,77 @@
 
   .containerGrid {
     display: grid;
-    width: 100%;
+    grid-template-columns: 100%;
     grid-template-rows: 120px auto;
-    grid-template-areas:
-      'search logo'
-      'list list';
+    width: 100%;
 
-    .search,
-    .logo {
-      padding: 20px;
-      background-color: #f2fbfd;
-    }
-
-    .list {
-      grid-area: list;
-      padding: 20px 20px 0;
-      overflow-y: auto;
-    }
-
-    .search {
-      grid-area: search;
+    .header {
+      background-color: #fff3d5;
       border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+      justify-content: flex-start;
+      align-items: center;
+      display: grid;
+      grid-template-columns: 14% 67% 6% 13%;
+      height: 120px;
+      padding: 20px;
 
-      h2 {
-        margin: 0 0 16px;
-        color: #3fafcb;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 8px;
+      .logo {
+        .title {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          font-size: 24px;
+          font-weight: 700;
+        }
+
+        p {
+          margin: 0;
+          font-size: 1.4rem;
+          font-weight: 400;
+          letter-spacing: 0.25rem;
+          position: relative;
+          color: #840606;
+
+          img {
+            position: absolute;
+            left: 86px;
+            top: 6px;
+          }
+        }
       }
     }
 
-    .logo {
-      grid-area: logo;
-      text-align: right;
-      border-top-right-radius: 0.5rem;
-      display: flex;
-      justify-content: flex-end;
+    .divider {
+      justify-self: center;
+      height: 40px;
+      width: 1px;
+      background-color: #dbb24a;
+    }
+
+    .house {
+      justify-self: flex-start;
+    }
+
+    .search {
+      justify-self: flex-end;
+    }
+
+    .description {
+      letter-spacing: 0;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #c99b25;
+      margin: 0 0 4px;
+    }
+
+    .list {
+      padding: 20px 20px 0;
+      overflow-y: auto;
     }
   }
 
   .badServer {
-    grid-area: list;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -66,7 +93,6 @@
   }
 
   .loaderWrapper {
-    grid-area: list;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,6 +119,6 @@
 
 .tableColumnsWidth {
   display: grid;
-  grid-template-columns: 17% 17% 15% 15% 14% 15% 5%;
+  grid-template-columns: 20% 20% 14% 14% 14% 14% auto;
   align-items: center;
 }
