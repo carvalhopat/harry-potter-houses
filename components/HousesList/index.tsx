@@ -9,7 +9,7 @@ import Houses from '../Houses';
 import Pagination from '../Pagination';
 
 function CandidatesList() {
-  const { Table, isLoading, listData, error, onPageChange, isReady } = useHousesList();
+  const { Table, isLoading, listData, error, onPageChange, showComponent } = useHousesList();
 
   return (
     <>
@@ -26,13 +26,17 @@ function CandidatesList() {
                 <img src="/lightning.svg" width="18" height="18" alt="Lightning" />
               </p>
             </div>
-            <div className={styles.search}>
-              <SearchBar />
-            </div>
-            <div className={styles.divider}></div>
-            <div className={styles.house}>
-              <Houses />
-            </div>
+            {showComponent && (
+              <>
+                <div className={styles.search}>
+                  <SearchBar />
+                </div>
+                <div className={styles.divider}></div>
+                <div className={styles.house}>
+                  <Houses />
+                </div>
+              </>
+            )}
           </div>
           {isLoading ? (
             <div className={styles.loaderWrapper}>

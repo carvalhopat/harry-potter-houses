@@ -15,6 +15,7 @@ function useCandidatesList() {
   });
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showComponent, setShowComponent] = useState(false);
 
   const router = useRouter();
   const { query } = router;
@@ -51,6 +52,7 @@ function useCandidatesList() {
   useEffect(() => {
     if (isReady) {
       fetchHousesData();
+      setShowComponent(true);
     }
   }, [fetchHousesData, isReady]);
 
@@ -61,8 +63,8 @@ function useCandidatesList() {
     isLoading,
     listData,
     error: !!error,
-    onPageChange: ({ selected }) => router.push({ query: { ...router.query, page: selected + 1 } }),
-    isReady
+    showComponent,
+    onPageChange: ({ selected }) => router.push({ query: { ...router.query, page: selected + 1 } })
   };
 }
 
