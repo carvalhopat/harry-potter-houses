@@ -1,11 +1,11 @@
 {
-  "/_app": "pages/_app.js",
-  "/api/_utils/getNewMatches": "pages/api/_utils/getNewMatches.js",
   "/api/_utils/paginateList": "pages/api/_utils/paginateList.js",
   "/api/_utils/sortList": "pages/api/_utils/sortList.js",
   "/api/hpHouses": "pages/api/hpHouses.js",
   "/": "pages/index.html",
+  "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
+  "/api/_utils/getNewMatches": "pages/api/_utils/getNewMatches.js",
   "/_document": "pages/_document.js",
   "/404": "pages/404.html"
 }
