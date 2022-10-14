@@ -5,7 +5,7 @@ import useHouses from './useHouses';
 import MenuDropdown from '../MenuDropdown';
 
 function Houses() {
-  const { selectedHouseColor, selectedHouse, filteredHouses, onSelectHouse, isReady } = useHouses();
+  const { selectedHouseColor, selectedHouse, filteredHouses, onSelectHouse } = useHouses();
 
   return (
     <div className={styles.housesWrapper}>

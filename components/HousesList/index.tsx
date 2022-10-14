@@ -26,17 +26,13 @@ function CandidatesList() {
                 <img src="/lightning.svg" width="18" height="18" alt="Lightning" />
               </p>
             </div>
-            {isReady && (
-              <>
-                <div className={styles.search}>
-                  <SearchBar />
-                </div>
-                <div className={styles.divider}></div>
-                <div className={styles.house}>
-                  <Houses />
-                </div>
-              </>
-            )}
+            <div className={styles.search}>
+              <SearchBar />
+            </div>
+            <div className={styles.divider}></div>
+            <div className={styles.house}>
+              <Houses />
+            </div>
           </div>
           {isLoading ? (
             <div className={styles.loaderWrapper}>

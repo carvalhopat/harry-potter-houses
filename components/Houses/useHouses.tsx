@@ -19,7 +19,6 @@ function useHouses() {
     selectedHouseColor,
     selectedHouse,
     filteredHouses,
-    isReady: router.isReady,
     onSelectHouse: ({ house }) =>
       typeof window !== 'undefined' && router.push({ query: { ...router.query, house, page: 1 } })
   };
