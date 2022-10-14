@@ -27,6 +27,8 @@ function useCandidatesList() {
     house = 'gryffindor'
   } = query;
 
+  const isReady = router.isReady;
+
   const fetchHousesData = useCallback(() => {
     setIsLoading(true);
     api
@@ -47,10 +49,10 @@ function useCandidatesList() {
   }, [termType, query, sort, sortType, house, page, pageSize]);
 
   useEffect(() => {
-    if (router.isReady) {
+    if (isReady) {
       fetchHousesData();
     }
-  }, [fetchHousesData, router?.isReady]);
+  }, [fetchHousesData, isReady]);
 
   const Table = dynamic(() => import('../Table'), { ssr: false });
 
@@ -59,7 +61,8 @@ function useCandidatesList() {
     isLoading,
     listData,
     error: !!error,
-    onPageChange: ({ selected }) => router.push({ query: { ...router.query, page: selected + 1 } })
+    onPageChange: ({ selected }) => router.push({ query: { ...router.query, page: selected + 1 } }),
+    isReady
   };
 }
 

@@ -23,13 +23,10 @@
 
     .thead {
       text-align: left;
-      //color: #791006;
       color: #840606;
       border-bottom: 1px solid #d0bc94;
       padding: 0 4px;
       font-size: 0.9rem;
-      //font-weight: 600;
-      //text-transform: uppercase;
 
       .theadValue {
         display: inline-flex;
@@ -48,7 +45,7 @@
         padding: 0 4px;
 
         &:hover {
-          background-color: #f8eede;
+          background-color: #fff8eb;
           transition: 0.3s;
         }
 

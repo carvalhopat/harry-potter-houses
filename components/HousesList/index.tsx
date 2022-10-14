@@ -8,15 +8,8 @@ import React from 'react';
 import Houses from '../Houses';
 import Pagination from '../Pagination';
 
-type teste = {
-  value: string;
-  isSortable?: boolean;
-  isNumberCell?: boolean;
-  formatter?: (item) => {};
-}[];
-
 function CandidatesList() {
-  const { Table, isLoading, listData, error, onPageChange } = useHousesList();
+  const { Table, isLoading, listData, error, onPageChange, isReady } = useHousesList();
 
   return (
     <>
@@ -27,21 +20,23 @@ function CandidatesList() {
               <div className={styles.title}>
                 <Image src="/glasses.svg" width="35" height="17" alt="Harry's glasses" />
                 Harry Potter
-              </div>{' '}
+              </div>
               <p>
                 houses &nbsp;list
                 <img src="/lightning.svg" width="18" height="18" alt="Lightning" />
               </p>
             </div>
-            <div className={styles.search}>
-              {/* <p className={styles.description}>Choose a filter:</p> */}
-              <SearchBar />
-            </div>
-            <div className={styles.divider}></div>
-            <div className={styles.house}>
-              {/* <p className={styles.description}>Choose a house:</p> */}
-              <Houses />
-            </div>
+            {isReady && (
+              <>
+                <div className={styles.search}>
+                  <SearchBar />
+                </div>
+                <div className={styles.divider}></div>
+                <div className={styles.house}>
+                  <Houses />
+                </div>
+              </>
+            )}
           </div>
           {isLoading ? (
             <div className={styles.loaderWrapper}>

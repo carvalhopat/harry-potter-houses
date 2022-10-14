@@ -18,11 +18,4 @@
   &:last-child {
     margin-bottom: 8px;
   }
-
-  .selected {
-    span {
-      filter: grayscale(100%) brightness(120%) sepia(90%) hue-rotate(5deg) saturate(500%) contrast(0.7);
-      -webkit-filter: grayscale(100%) brightness(120%) sepia(90%) hue-rotate(5deg) saturate(500%) contrast(0.7);
-    }
-  }
 }

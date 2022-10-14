@@ -35,7 +35,7 @@ function useSearchBar() {
     router.push({ query: { ...router.query, termType: termType } });
   };
 
-  const menuOptions = ['name', 'species'].filter((type) => type !== currentTermTypeValue);
+  const menuOptions = ['Name', 'Species'].filter((type) => type !== currentTermTypeValue);
 
   return {
     onSearchSubmit,

@@ -1,16 +1,6 @@
 @mixin button($lighterColor, $darkerColor) {
   background-color: $lighterColor;
   color: $darkerColor;
-
-  &:hover {
-    opacity: 0.8;
-    transition: 0.5s;
-  }
-
-  &:focus {
-    opacity: 0.3;
-    transition: 0.3s;
-  }
 }
 
 .housesWrapper {
@@ -22,6 +12,7 @@
     width: 140px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 8px;
     cursor: pointer;
   }
@@ -32,21 +23,42 @@
     font-size: 0.9rem;
     border: none;
     cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+      transition: 0.5s;
+    }
   }
 
   .red {
     @include button(#ed5a64, #99010c);
+
+    svg path {
+      fill: #99010c;
+    }
   }
 
   .yellow {
-    @include button(#ffde3a, #eec604);
+    @include button(#ffe45c, #b89a08);
+
+    svg path {
+      fill: #b89a08;
+    }
   }
 
   .blue {
     @include button(#5aa5e7, #024680);
+
+    svg path {
+      fill: #024680;
+    }
   }
 
   .green {
     @include button(#86ba82, #1f6c19);
+
+    svg path {
+      fill: #1f6c19;
+    }
   }
 }

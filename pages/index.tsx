@@ -9,7 +9,7 @@ const Home: NextPage = () => {
       <Head>
         <title>Harry Potter Houses - Patrícia Carvalho</title>
         <meta name="description" content="Harry Potter Houses - Patrícia Carvalho" />
-        <link rel="icon" href="favicon.svg" />
+        <link rel="icon" href="/glasses.svg" />
       </Head>
 
       <HousesList />

@@ -24,7 +24,7 @@ function SearchBar() {
         >
           {menuOptions.map((type) => (
             <div
-              //className={cx(styles.menuOptions, { [styles.showMenu]: showMenu })}
+              className={styles.typeOption}
               key={type}
               onClick={() => onChooseTermType(type)}
               data-testid={`select-option-${type}`}

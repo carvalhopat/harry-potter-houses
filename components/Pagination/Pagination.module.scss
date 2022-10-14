@@ -10,27 +10,27 @@
   .paginationLinkItem {
     padding: 2px 8px;
     margin: 0 5px;
-    border: 1px solid black;
+    border: 1px solid #840606;
+    color: #840606;
     border-radius: 5px;
 
     &:hover {
-      background-color: brown;
-      transition: 0.5s;
+      background-color: #840606;
+      color: #fff;
+      transition: 0.3s;
     }
   }
 
   .activeItem {
-    background-color: brown;
+    background-color: #840606;
+    border: 1px solid #840606;
+    color: #fff;
   }
 
   .disabled {
-    background-color: rgb(234, 234, 234);
-    border: 1px solid rgb(158, 158, 158);
-    color: rgb(158, 158, 158);
+    background-color: #f7d98e;
+    border: none;
+    color: #c99b25;
     pointer-events: none;
   }
-
-  // .teste {
-  //   background-color: black;
-  // }
 }

@@ -25,15 +25,11 @@ const categories = {
   alive: {
     value: 'Alive',
     formatter: ({ item }) =>
-      // <div style={{ display: 'flex', justifyContent: 'center' }}>
-      // {
       item.alive ? (
         <Image src="/true-icon.svg" width="12" height="12" alt="True icon" />
       ) : (
         <Image src="/false-icon.svg" width="12" height="12" alt="False icon" />
       )
-    // }
-    /* </div> */
   }
 };
 

@@ -15,9 +15,26 @@
       width: 140px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 6px 8px;
       cursor: pointer;
       color: #c99b25;
+
+      svg path {
+        fill: #c99b25;
+      }
+    }
+
+    .typeOption {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #595959;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+        transition: 0.5s;
+      }
     }
   }
 
