@@ -1,11 +1,9 @@
 {
   "name": "patriciacarvalho-harrypotterhouses",
-  "homepage": "https://carvalhopat.github.io/harry-potter-houses",
+  "homepage": "https://harry-potter-houses.vercel.app/",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -17,7 +15,6 @@
     "@babel/preset-env": "^7.19.1",
     "axios": "^0.27.2",
     "classnames": "^2.3.2",
-    "gh-pages": "^4.0.0",
     "identity-obj-proxy": "^3.0.0",
     "next": "12.3.0",
     "ramda": "^0.28.0",
