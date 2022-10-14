@@ -1,5 +1,6 @@
 {
   "name": "patriciacarvalho-harrypotterhouses",
+  "homepage": "https://carvalhopat.github.io/harry-potter-houses",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,12 +9,14 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --config ./jest.config.js",
-    "update:snapshot": "jest --updateSnapshot"
+    "update:snapshot": "jest --updateSnapshot",
+    "deploy": "mv build/* ./* && rmdir build"
   },
   "dependencies": {
     "@babel/preset-env": "^7.19.1",
     "axios": "^0.27.2",
     "classnames": "^2.3.2",
+    "gh-pages": "^4.0.0",
     "identity-obj-proxy": "^3.0.0",
     "next": "12.3.0",
     "ramda": "^0.28.0",
