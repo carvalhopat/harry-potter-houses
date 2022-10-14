@@ -11,7 +11,6 @@ const Home: NextPage = () => {
         <meta name="description" content="Harry Potter Houses - Patrícia Carvalho" />
         <link rel="icon" href="/glasses.svg" />
       </Head>
-
       <HousesList />
     </>
   );
