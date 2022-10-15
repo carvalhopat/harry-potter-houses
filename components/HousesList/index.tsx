@@ -9,14 +9,15 @@ import Houses from '../Houses';
 import Pagination from '../Pagination';
 
 function CandidatesList() {
-  const { Table, isLoading, listData, error, onPageChange, showComponent } = useHousesList();
+  const { Table, isLoading, listData, error, onPageChange, showComponent, router } =
+    useHousesList();
 
   return (
     <>
       <div className={styles.container}>
         <div className={styles.containerGrid}>
           <div className={styles.header}>
-            <div className={styles.logo}>
+            <div className={styles.logo} onClick={() => router.push('/')}>
               <div className={styles.title}>
                 <Image src="/glasses.svg" width="35" height="17" alt="Harry's glasses" />
                 Harry Potter

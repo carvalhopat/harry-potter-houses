@@ -23,7 +23,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const newMatches = getNewMatches({ query, data: sortedCandidatesList, termType });
       const paginatedList = paginateList({ pageNumber: page, pageSize, items: newMatches });
 
-      return res.status(200).send({ totalCount: candidatesList, data: paginatedList });
+      const responseData = newMatches.length < 8 ? newMatches : paginatedList;
+
+      return res.status(200).send({ totalCount: newMatches, data: responseData });
     }
 
     const paginatedList = paginateList({ pageNumber: page, pageSize, items: sortedCandidatesList });

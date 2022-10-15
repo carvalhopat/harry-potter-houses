@@ -16,7 +16,11 @@ function Sort({ sortType }: TSortParams) {
   function Icon({ path, arrow }) {
     return (
       <svg width="8" height="5" viewBox="0 0 12 6" xmlns="http://www.w3.org/2000/svg">
-        <path d={path} fill={category === sortType && sort === arrow ? '#000' : '#AAAAAA'} />
+        <path
+          d={path}
+          fill={category === sortType && sort === arrow ? '#c97575' : '#AAAAAA'}
+          stroke={category === sortType && sort === arrow ? '#c97575' : ''}
+        />
       </svg>
     );
   }

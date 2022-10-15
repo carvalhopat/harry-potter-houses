@@ -64,6 +64,7 @@ function useCandidatesList() {
     listData,
     error: !!error,
     showComponent,
+    router,
     onPageChange: ({ selected }) => router.push({ query: { ...router.query, page: selected + 1 } })
   };
 }
