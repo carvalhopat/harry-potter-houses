@@ -49,14 +49,23 @@
           transition: 0.3s;
         }
 
-        &:not(:last-child) {
-          border-bottom: 1px solid #e8e8e8;
-        }
-
         .numberCell {
           text-align: right;
         }
       }
+
+      .divider {
+        height: 1px;
+        width: 100%;
+        background-color: #e8e8e8;
+      }
+    }
+
+    .tableAdjust {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
     }
   }
 }

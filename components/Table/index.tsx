@@ -6,6 +6,7 @@ import Sort from './Sort';
 import cx from 'classnames';
 import { useRouter } from 'next/router';
 import React from 'react';
+import tableListLength from '../../helpers/tableListLength';
 
 type TListParams = {
   list: TListData[];
@@ -46,7 +47,9 @@ function Table({ categories, list, customClass }: TListParams) {
               );
             })}
           </div>
-          <div className={styles.tbody}>
+          <div
+            className={cx(styles.tbody, { [styles.tableAdjust]: list.length === tableListLength })}
+          >
             {list?.map((item) => {
               const rowItems = Object.entries(categories).reduce(
                 (acc, [category, { isNumberCell, formatter }]) => {
@@ -64,9 +67,12 @@ function Table({ categories, list, customClass }: TListParams) {
               );
 
               return (
-                <div key={item.name} className={cx(styles.tableRow, customClass)}>
-                  {rowItems}
-                </div>
+                <>
+                  <div key={item.name} className={cx(styles.tableRow, customClass)}>
+                    {rowItems}
+                  </div>
+                  <div className={styles.divider}></div>
+                </>
               );
             })}
           </div>

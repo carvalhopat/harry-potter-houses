@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import api from '../../helpers/axiosInstance';
+import tableListLength from '../../helpers/tableListLength';
 
 type THPList = {
   data: [];
@@ -24,7 +25,7 @@ function useCandidatesList() {
     sort = 'asc',
     sortType = 'name',
     page = 1,
-    pageSize = 7,
+    pageSize = tableListLength,
     house = 'gryffindor'
   } = query;
 
